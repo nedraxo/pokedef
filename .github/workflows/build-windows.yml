@@ -1,0 +1,44 @@
+name: Build Windows installer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller -r requirements.txt
+
+      - name: Build executable
+        run: |
+          pyinstaller --onefile --windowed --name Brutforce brutforce.py
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Build installer
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PIN-Bruteforcer-Setup
+          path: Output/PIN-Bruteforcer-Setup.exe
+
+      - name: Upload raw exe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Brutforce-exe
+          path: dist/Brutforce.exe
