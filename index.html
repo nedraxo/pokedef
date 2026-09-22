@@ -1,0 +1,1687 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pokédef — herbier de référence des variétés de cannabis et types de hash : fiches, effets, arômes et origines.">
+<title>Pokédef</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f140d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Great+Vibes&family=Space+Mono:wght@400;700&display=swap">
+<style>
+  :root {
+    --bg: #e9ede1;
+    --surface: #fbfcf7;
+    --surface-2: #f0f3e9;
+    --ink: #1b2317;
+    --ink-soft: #5a6552;
+    --line: rgba(27,35,23,0.12);
+    --line-soft: rgba(27,35,23,0.07);
+    --accent: #a9761f;
+    --accent-ink: #7c5411;
+    --shadow: 0 8px 24px -12px rgba(27,35,23,0.35);
+    --shadow-lift: 0 20px 50px -18px rgba(27,35,23,0.5);
+
+    --t-indica: #7d5bc4;
+    --t-sativa: #d97e1c;
+    --t-hybrid: #3f9a52;
+    --t-hash:   #a5703f;
+
+    --ff-display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --ff-body: "DM Sans", system-ui, sans-serif;
+    --ff-mono: "Space Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f140d;
+      --surface: #171e13;
+      --surface-2: #1f281a;
+      --ink: #eaf0e2;
+      --ink-soft: #97a58c;
+      --line: rgba(234,240,226,0.14);
+      --line-soft: rgba(234,240,226,0.07);
+      --accent: #d9a747;
+      --accent-ink: #f0cf85;
+      --shadow: 0 10px 28px -14px rgba(0,0,0,0.7);
+      --shadow-lift: 0 26px 60px -20px rgba(0,0,0,0.85);
+      --t-indica: #a487e0;
+      --t-sativa: #eaa03f;
+      --t-hybrid: #5cbd6f;
+      --t-hash:   #c68f57;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f140d;
+    --surface: #171e13;
+    --surface-2: #1f281a;
+    --ink: #eaf0e2;
+    --ink-soft: #97a58c;
+    --line: rgba(234,240,226,0.14);
+    --line-soft: rgba(234,240,226,0.07);
+    --accent: #d9a747;
+    --accent-ink: #f0cf85;
+    --shadow: 0 10px 28px -14px rgba(0,0,0,0.7);
+    --shadow-lift: 0 26px 60px -20px rgba(0,0,0,0.85);
+    --t-indica: #a487e0;
+    --t-sativa: #eaa03f;
+    --t-hybrid: #5cbd6f;
+    --t-hash:   #c68f57;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(90% 55% at 10% -8%, rgba(63,154,82,0.16) 0%, rgba(63,154,82,0) 60%),
+      radial-gradient(80% 50% at 100% 0%, rgba(169,118,31,0.14) 0%, rgba(169,118,31,0) 62%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--ff-body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 40;
+    background: var(--bg);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(169,118,31,0.22), var(--shadow);
+  }
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 14px 18px 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .brand-glyph {
+    width: 38px; height: 38px;
+    flex: 0 0 auto;
+    border-radius: 11px;
+    background: linear-gradient(150deg, var(--t-hybrid), var(--accent));
+    display: grid; place-items: center;
+    box-shadow: var(--shadow);
+  }
+  .brand-glyph svg { width: 26px; height: 26px; }
+  .brand-text h1 {
+    margin: 0;
+    font-family: var(--ff-display);
+    font-weight: 800;
+    font-size: 1.42rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .brand-text p {
+    margin: 3px 0 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-family: var(--ff-mono);
+  }
+  .theme-toggle {
+    margin-left: auto;
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    display: grid; place-items: center;
+    font-size: 1.05rem;
+  }
+  .theme-toggle:active { transform: scale(0.94); }
+
+  .search-wrap {
+    margin-top: 13px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .search-wrap svg {
+    position: absolute; left: 13px;
+    width: 17px; height: 17px;
+    color: var(--ink-soft);
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    padding: 11px 14px 11px 38px;
+    border-radius: 13px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  #search::placeholder { color: var(--ink-soft); }
+  #search:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .chips {
+    margin-top: 11px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: transform .12s ease;
+  }
+  .chip:active { transform: scale(0.95); }
+  .chip[aria-pressed="true"] {
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 7px 16px -8px rgba(0,0,0,0.55);
+  }
+  .chip[data-f="all"][aria-pressed="true"]    { background: var(--ink); color: var(--bg); }
+  .chip[data-f="indica"][aria-pressed="true"] { background: linear-gradient(135deg,#9573d8,var(--t-indica)); }
+  .chip[data-f="sativa"][aria-pressed="true"] { background: linear-gradient(135deg,#ec9536,var(--t-sativa)); }
+  .chip[data-f="hybrid"][aria-pressed="true"] { background: linear-gradient(135deg,#59b66c,var(--t-hybrid)); }
+  .chip[data-f="hash"][aria-pressed="true"]   { background: linear-gradient(135deg,#c08a5a,var(--t-hash)); }
+
+  /* ---------- Grid ---------- */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 16px 14px 60px;
+  }
+  .count {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 2px 4px 12px;
+  }
+  .count b { color: var(--accent-ink); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    position: relative;
+    text-align: left;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background-color: var(--surface);
+    background-image: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    padding: 13px 13px 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .16s ease, box-shadow .16s ease;
+    color: inherit;
+  }
+  .card::before {
+    content: "";
+    position: absolute; inset: 0 0 auto 0;
+    height: 108px;
+    background: radial-gradient(120% 120% at 78% 4%, var(--tint) 0%, transparent 66%);
+    opacity: 0.62;
+    pointer-events: none;
+  }
+  .card:active { transform: scale(0.97); }
+  .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (hover: hover) {
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  }
+  .card-no {
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+  }
+  .specimen {
+    position: relative;
+    height: 88px;
+    display: grid; place-items: center;
+    margin: 2px 0 8px;
+  }
+  .specimen::before {
+    content: "";
+    position: absolute;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: radial-gradient(circle, var(--tint) 0%, transparent 68%);
+    opacity: 0.38;
+    pointer-events: none;
+  }
+  .specimen svg { position: relative; width: 74px; height: 74px; overflow: visible; }
+  .card-name {
+    font-family: var(--ff-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0 0 8px;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 5px; }
+  .badge {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    color: #fff;
+  }
+  .thc-tag {
+    position: absolute;
+    top: 11px; right: 11px;
+    font-family: var(--ff-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 3px 7px;
+    border-radius: 8px;
+  }
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 48px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Hero stats ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 2px 0 16px;
+  }
+  .hero-tile {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background-color: var(--surface);
+    background-image: linear-gradient(180deg, var(--surface), var(--surface-2));
+    padding: 12px 13px 11px;
+    box-shadow: var(--shadow);
+  }
+  .hero-tile .n {
+    font-family: var(--ff-mono);
+    font-weight: 700;
+    font-size: 1.55rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-tile .l {
+    margin-top: 5px;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-family: var(--ff-mono);
+  }
+  .hero-tile.t-all .n  { color: var(--accent-ink); }
+  .hero-tile.t-weed .n { color: var(--t-hybrid); }
+  .hero-tile.t-hash .n { color: var(--t-hash); }
+
+  /* ---------- Detail overlay ---------- */
+  .overlay {
+    position: fixed; inset: 0;
+    z-index: 90;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+  .sheet {
+    width: 100%;
+    max-width: 620px;
+    max-height: 92%;
+    background: var(--surface);
+    border-radius: 26px 26px 0 0;
+    box-shadow: var(--shadow-lift);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(100%);
+    transition: transform .32s cubic-bezier(.22,1,.36,1);
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .overlay.open .sheet { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .overlay, .sheet { transition: none; }
+  }
+  @media (min-width: 640px) {
+    .overlay { align-items: center; }
+    .sheet { border-radius: 26px; max-height: 88%; }
+  }
+  .sheet-hero {
+    position: relative;
+    padding: 22px 22px 18px;
+    background:
+      radial-gradient(130% 100% at 82% 0%, var(--tint) 0%, transparent 60%),
+      var(--surface-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .grabber {
+    width: 40px; height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+    margin: 0 auto 16px;
+  }
+  .sheet-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 34px; height: 34px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 1.2rem; line-height: 1;
+    display: grid; place-items: center;
+  }
+  .sheet-close:active { transform: scale(0.92); }
+  .sheet-specimen { display: grid; place-items: center; margin-bottom: 6px; }
+  .sheet-specimen svg { width: 128px; height: 128px; overflow: visible; }
+  .sheet-no {
+    font-family: var(--ff-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+  .sheet-name {
+    font-family: var(--ff-display);
+    font-weight: 800;
+    font-size: 1.72rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+    text-wrap: balance;
+    margin: 3px 0 12px;
+    line-height: 1.05;
+  }
+  .sheet-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
+
+  .sheet-body { padding: 20px 22px 4px; display: flex; flex-direction: column; gap: 22px; }
+
+  .potency { display: flex; gap: 12px; }
+  .pot-tile {
+    flex: 1;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-2);
+    padding: 12px 14px;
+  }
+  .pot-tile .k {
+    font-family: var(--ff-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .pot-tile .v {
+    font-family: var(--ff-mono);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .pot-tile .v small { font-size: 0.85rem; color: var(--ink-soft); }
+
+  .section-label {
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin-bottom: 11px;
+  }
+  .stats { display: flex; flex-direction: column; gap: 9px; }
+  .stat-row { display: grid; grid-template-columns: 84px 1fr 30px; align-items: center; gap: 10px; }
+  .stat-row .name { font-size: 0.83rem; font-weight: 500; }
+  .stat-track {
+    height: 9px;
+    border-radius: 999px;
+    background: var(--line-soft);
+    overflow: hidden;
+  }
+  .stat-fill {
+    display: block;
+    height: 100%;
+    min-width: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #2f74e6, #5aa2ff);
+    box-shadow: 0 0 6px rgba(60,140,246,0.4);
+    transform-origin: left center;
+    animation: statGrow .6s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes statGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) {
+    .stat-fill { animation: none; }
+  }
+  .stat-row .val {
+    font-family: var(--ff-mono);
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .taglist { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag {
+    font-size: 0.8rem;
+    padding: 6px 11px;
+    border-radius: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .tag.terp { border-color: var(--accent); color: var(--accent-ink); }
+
+  .desc { font-size: 0.94rem; color: var(--ink); }
+  .meta-line {
+    display: flex; gap: 8px;
+    font-size: 0.85rem;
+    padding: 9px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .meta-line .k { color: var(--ink-soft); flex: 0 0 92px; }
+  .meta-line .v { font-weight: 500; }
+
+  .disclaimer {
+    max-width: 760px;
+    margin: 30px auto 0;
+    padding: 0 18px;
+    font-size: 0.72rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  /* ---------- Easter egg 7373 ---------- */
+  .egg {
+    position: fixed; inset: 0; z-index: 200;
+    display: none;
+    place-items: center;
+    overflow: hidden;
+    text-align: center;
+    padding: 30px 24px;
+    background: radial-gradient(130% 120% at 50% -10%, #234a24 0%, #0c1a0c 62%, #050b05 100%);
+    animation: eggFade .4s ease;
+  }
+  .egg.open { display: grid; }
+  @keyframes eggFade { from { opacity: 0; } to { opacity: 1; } }
+  .egg-leaves { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .egg-leaf {
+    position: absolute; top: -70px;
+    animation: eggFall linear infinite;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+  }
+  .egg-leaf svg { width: 100%; height: 100%; display: block; }
+  @keyframes eggFall {
+    0%   { transform: translateY(-12vh) rotate(0deg); }
+    100% { transform: translateY(118vh) rotate(380deg); }
+  }
+  .egg-content { position: relative; z-index: 2; max-width: 540px; display: flex; flex-direction: column; align-items: center; }
+  .egg-emblem { width: 84px; height: 84px; margin-bottom: 14px; filter: drop-shadow(0 0 20px rgba(120,220,120,0.5)); }
+  .egg-emblem svg { width: 100%; height: 100%; }
+  .egg-title {
+    font-family: var(--ff-display);
+    font-weight: 800;
+    font-size: clamp(2.1rem, 9vw, 3.4rem);
+    line-height: 1.04;
+    color: #eafce0;
+    text-shadow: 0 0 26px rgba(120,220,120,0.55), 0 2px 4px rgba(0,0,0,0.4);
+    text-wrap: balance;
+    margin: 0 0 38px;
+  }
+  .egg-sign { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .egg-pseudo {
+    font-family: var(--ff-mono);
+    font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #a7dc92;
+  }
+  .egg-signature {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(2.6rem, 13vw, 3.8rem);
+    color: #e6b957;
+    line-height: 0.95;
+    transform: rotate(-7deg);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+  .egg-swoosh { width: 190px; height: 22px; margin-top: -4px; }
+  .egg-hint { margin-top: 42px; font-size: 0.78rem; letter-spacing: 0.04em; color: #7ba06d; }
+  .egg-close {
+    position: absolute; z-index: 3;
+    top: calc(14px + env(safe-area-inset-top, 0px)); right: 16px;
+    width: 40px; height: 40px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.3); color: #eafce0;
+    font-size: 1.3rem; line-height: 1;
+    display: grid; place-items: center;
+  }
+  .egg-close:active { transform: scale(0.92); }
+  @media (prefers-reduced-motion: reduce) {
+    .egg, .egg-leaf { animation: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-glyph" aria-hidden="true">
+        <svg viewBox="-50 -100 100 108" fill="#fff"></svg>
+      </span>
+      <div class="brand-text">
+        <h1>Pokédef</h1>
+        <p>Herbier &amp; résines</p>
+      </div>
+      <button class="theme-toggle" id="themeBtn" aria-label="Changer de thème" title="Thème clair / sombre">◐</button>
+    </div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <input id="search" type="search" placeholder="Rechercher une variété, un arôme…" autocomplete="off">
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Filtrer par type">
+      <button class="chip" data-f="all" aria-pressed="true">Tout</button>
+      <button class="chip" data-f="indica" aria-pressed="false">Indica</button>
+      <button class="chip" data-f="sativa" aria-pressed="false">Sativa</button>
+      <button class="chip" data-f="hybrid" aria-pressed="false">Hybride</button>
+      <button class="chip" data-f="hash" aria-pressed="false">Hash &amp; concentrés</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="hero"></div>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <p class="disclaimer">
+    Pokédef — herbier de référence à visée culturelle et informative. Les taux (THC/CBD) sont des ordres de grandeur variables selon la culture, la récolte et la génétique. Ce répertoire n'encourage aucun usage : renseigne-toi sur la législation en vigueur là où tu te trouves.
+  </p>
+</main>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="sheetName">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<div class="egg" id="egg" role="dialog" aria-modal="true" aria-label="Easter egg">
+  <div class="egg-leaves" id="eggLeaves" aria-hidden="true"></div>
+  <button class="egg-close" id="eggClose" aria-label="Fermer">✕</button>
+  <div class="egg-content">
+    <span class="egg-emblem" id="eggEmblem" aria-hidden="true"></span>
+    <h2 class="egg-title">Aller mamène,<br>on vas se gazer 🌬️</h2>
+    <div class="egg-sign">
+      <span class="egg-pseudo">tim.mrtb</span>
+      <span class="egg-signature">tim.mrtb</span>
+      <svg class="egg-swoosh" viewBox="0 0 190 22" fill="none" aria-hidden="true">
+        <path d="M6 15 C 44 3 86 23 128 11 C 152 4 176 6 184 14" stroke="#e6b957" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="egg-hint">Touche l'écran pour revenir au Pokédef</p>
+  </div>
+</div>
+
+<script>
+/* ---------------- Données ---------------- */
+const TYPE_LABEL = { indica:"Indica", sativa:"Sativa", hybrid:"Hybride", hash:"Hash", concentrate:"Concentré" };
+const TYPE_COLOR = {
+  indica:"var(--t-indica)", sativa:"var(--t-sativa)", hybrid:"var(--t-hybrid)",
+  hash:"var(--t-hash)", concentrate:"var(--t-hash)"
+};
+const TYPE_VAR = {
+  indica:"--t-indica", sativa:"--t-sativa", hybrid:"--t-hybrid",
+  hash:"--t-hash", concentrate:"--t-hash"
+};
+function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+const DATA = [
+  { n:1, name:"OG Kush", types:["hybrid"], thc:"19–24%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Terre","Pin","Boisé","Citron"], aroma:"Diesel terreux, notes de pin et d'agrumes.",
+    origin:"Chemdawg × Hindu Kush (Californie)", cls:"Hybride équilibré",
+    stats:{Détente:78,Énergie:38,Euphorie:72,Créativité:55,Sommeil:60},
+    desc:"Un pilier de la côte ouest. Effet cérébral euphorisant qui glisse vers une détente corporelle profonde." },
+  { n:2, name:"Sour Diesel", types:["sativa"], thc:"20–25%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Diesel","Agrumes","Terre"], aroma:"Carburant piquant sur fond d'agrumes.",
+    origin:"Chemdawg × Super Skunk", cls:"Sativa dominante",
+    stats:{Détente:32,Énergie:88,Euphorie:80,Créativité:78,Sommeil:15},
+    desc:"Réputée pour son coup de fouet cérébral, énergisant et bavard. Une classique du matin." },
+  { n:3, name:"Girl Scout Cookies", types:["hybrid"], thc:"22–28%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Sucré","Terre","Menthe"], aroma:"Douceur pâtissière et menthe terreuse.",
+    origin:"OG Kush × Durban Poison", cls:"Hybride puissant",
+    stats:{Détente:74,Énergie:48,Euphorie:85,Créativité:60,Sommeil:52},
+    desc:"Très puissante, euphorie de tout le corps. À manier avec modération pour les novices." },
+  { n:4, name:"Northern Lights", types:["indica"], thc:"16–21%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Sucré","Épicé","Pin"], aroma:"Résineuse, douce et épicée.",
+    origin:"Afghani × Thaï", cls:"Indica pure",
+    stats:{Détente:92,Énergie:12,Euphorie:60,Créativité:30,Sommeil:90},
+    desc:"L'indica de référence pour la soirée : relaxation musculaire et sommeil réparateur." },
+  { n:5, name:"Blue Dream", types:["hybrid","sativa"], thc:"17–24%", cbd:"< 2%", terp:"Myrcène",
+    flavors:["Myrtille","Sucré","Baies"], aroma:"Myrtille sucrée et herbacée.",
+    origin:"Blueberry × Haze", cls:"Hybride à dominante sativa",
+    stats:{Détente:58,Énergie:70,Euphorie:76,Créativité:72,Sommeil:30},
+    desc:"Détente douce sans lourdeur, avec un plafond cérébral créatif. Très accessible." },
+  { n:6, name:"Granddaddy Purple", types:["indica"], thc:"17–23%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Raisin","Baies","Sucré"], aroma:"Raisin et baies confites.",
+    origin:"Purple Urkle × Big Bud", cls:"Indica pure",
+    stats:{Détente:90,Énergie:15,Euphorie:68,Créativité:28,Sommeil:88},
+    desc:"Teintes violettes marquées, arôme de raisin. Détente lourde et faim au rendez-vous." },
+  { n:7, name:"White Widow", types:["hybrid"], thc:"18–23%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Terre","Boisé","Piquant"], aroma:"Terreuse et poivrée, très résineuse.",
+    origin:"Brazilian Sativa × South Indian Indica", cls:"Hybride équilibré",
+    stats:{Détente:60,Énergie:62,Euphorie:74,Créativité:60,Sommeil:35},
+    desc:"Icône des coffee-shops d'Amsterdam. Recouverte de trichomes blancs, effet énergique et social." },
+  { n:8, name:"Jack Herer", types:["sativa"], thc:"18–23%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Pin","Agrumes","Épicé"], aroma:"Pin résineux et épices.",
+    origin:"Haze × (Northern Lights #5 × Shiva Skunk)", cls:"Sativa dominante",
+    stats:{Détente:38,Énergie:82,Euphorie:78,Créativité:85,Sommeil:18},
+    desc:"Nommée d'après l'activiste. Clarté cérébrale, focus créatif et bonne humeur." },
+  { n:9, name:"Gorilla Glue #4", types:["hybrid"], thc:"25–30%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Terre","Piquant","Pin","Café"], aroma:"Âcre, terreuse et collante de résine.",
+    origin:"Chem's Sister × Sour Dubb × Chocolate Diesel", cls:"Hybride très puissant",
+    stats:{Détente:85,Énergie:40,Euphorie:82,Créativité:50,Sommeil:65},
+    desc:"Ultra résineuse (« colle »). Effet massue qui cloue au canapé — d'où son nom." },
+  { n:10, name:"Amnesia Haze", types:["sativa"], thc:"20–25%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Agrumes","Terre","Citron"], aroma:"Citronnée et terreuse.",
+    origin:"Landraces × Haze", cls:"Sativa dominante",
+    stats:{Détente:35,Énergie:86,Euphorie:82,Créativité:80,Sommeil:14},
+    desc:"Haze planante et euphorisante, montée cérébrale intense. Un incontournable des cups." },
+  { n:11, name:"Purple Haze", types:["sativa"], thc:"16–20%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Baies","Terre","Sucré"], aroma:"Baies sucrées et notes terreuses.",
+    origin:"Purple Thaï × Haze", cls:"Sativa dominante",
+    stats:{Détente:40,Énergie:78,Euphorie:80,Créativité:82,Sommeil:20},
+    desc:"Rendue célèbre par Hendrix. Effet rêveur et créatif, teintes pourpres nostalgiques." },
+  { n:12, name:"Zkittlez", types:["indica","hybrid"], thc:"18–23%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Raisin","Bonbon","Tropical"], aroma:"Bonbon fruité, cocktail tropical.",
+    origin:"Grape Ape × Grapefruit", cls:"Hybride à dominante indica",
+    stats:{Détente:80,Énergie:30,Euphorie:78,Créativité:45,Sommeil:70},
+    desc:"Profil aromatique bonbon très prononcé. Détente calme et sourire garanti." },
+  { n:13, name:"Wedding Cake", types:["hybrid","indica"], thc:"22–27%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Vanille","Sucré","Terre"], aroma:"Gâteau vanillé et terreux.",
+    origin:"Triangle Kush × Animal Mints", cls:"Hybride à dominante indica",
+    stats:{Détente:84,Énergie:35,Euphorie:82,Créativité:48,Sommeil:68},
+    desc:"Riche et onctueuse. Relaxation profonde avec une belle euphorie, idéale en fin de journée." },
+  { n:14, name:"Runtz", types:["hybrid"], thc:"19–29%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Bonbon","Fruité","Sucré"], aroma:"Bonbons fruités acidulés.",
+    origin:"Zkittlez × Gelato", cls:"Hybride équilibré",
+    stats:{Détente:68,Énergie:58,Euphorie:88,Créativité:60,Sommeil:42},
+    desc:"Star moderne au goût de bonbons. Euphorie durable et détente équilibrée." },
+  { n:15, name:"Gelato", types:["hybrid"], thc:"20–25%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Sucré","Baies","Agrumes"], aroma:"Dessert crémeux, baies et agrumes.",
+    origin:"Sunset Sherbet × Thin Mint GSC", cls:"Hybride équilibré",
+    stats:{Détente:72,Énergie:55,Euphorie:84,Créativité:62,Sommeil:45},
+    desc:"Profil gourmand très recherché. Détente physique avec un mental clair et créatif." },
+  { n:16, name:"AK-47", types:["hybrid","sativa"], thc:"18–22%", cbd:"< 1.5%", terp:"Terpinolène",
+    flavors:["Terre","Acidulé","Floral"], aroma:"Terreuse, florale et sûre.",
+    origin:"Mélange Colombie/Mexique/Thaïlande/Afghanistan", cls:"Hybride à dominante sativa",
+    stats:{Détente:52,Énergie:72,Euphorie:76,Créativité:66,Sommeil:28},
+    desc:"Malgré son nom, effet doux et durable, cérébral et détendu à la fois." },
+  { n:17, name:"Bubba Kush", types:["indica"], thc:"15–22%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Café","Chocolat","Terre"], aroma:"Café moulu et cacao terreux.",
+    origin:"OG Kush × Northern Lights (probable)", cls:"Indica pure",
+    stats:{Détente:90,Énergie:14,Euphorie:62,Créativité:26,Sommeil:86},
+    desc:"Indica lourde aux notes de café. Relaxation sédative, parfaite avant le coucher." },
+  { n:18, name:"Pineapple Express", types:["hybrid"], thc:"18–24%", cbd:"< 1%", terp:"Ocimène",
+    flavors:["Ananas","Tropical","Pin"], aroma:"Ananas mûr et fruits tropicaux.",
+    origin:"Trainwreck × Hawaiian", cls:"Hybride à dominante sativa",
+    stats:{Détente:55,Énergie:74,Euphorie:80,Créativité:70,Sommeil:26},
+    desc:"Énergie enjouée et productive. Arôme tropical vif rendu culte par le cinéma." },
+  { n:19, name:"Durban Poison", types:["sativa"], thc:"18–25%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Sucré","Pin","Terre"], aroma:"Anisé, sucré et résineux.",
+    origin:"Landrace sud-africaine (Durban)", cls:"Sativa pure",
+    stats:{Détente:30,Énergie:90,Euphorie:78,Créativité:84,Sommeil:12},
+    desc:"« L'espresso du cannabis ». Énergie pure et concentration, sans lourdeur corporelle." },
+  { n:20, name:"Critical Kush", types:["indica"], thc:"20–25%", cbd:"< 2%", terp:"Myrcène",
+    flavors:["Terre","Épicé","Piquant"], aroma:"Terreuse, épicée et boisée.",
+    origin:"Critical Mass × OG Kush", cls:"Indica pure",
+    stats:{Détente:92,Énergie:16,Euphorie:64,Créativité:24,Sommeil:88},
+    desc:"Rendement massif et effet très relaxant. Antidouleur et anti-stress réputé." },
+
+  { n:21, name:"Charas", types:["hash"], thc:"25–40%", cbd:"1–3%", terp:"Résine fraîche",
+    flavors:["Terre","Épices","Fleur"], aroma:"Résine vivante, boisée et florale.",
+    origin:"Frotté main — Himalaya (Inde, Népal)", cls:"Hash traditionnel (plante fraîche)",
+    stats:{Détente:82,Énergie:34,Euphorie:80,Créativité:58,Sommeil:60},
+    desc:"Résine frottée à la main sur les plants vivants, façonnée en boules souples. Riche et aromatique." },
+  { n:22, name:"Hash Marocain", types:["hash"], thc:"12–25%", cbd:"1–4%", terp:"Sec / tamisé",
+    flavors:["Herbacé","Épicé","Doux"], aroma:"Herbacée douce, légèrement épicée.",
+    origin:"Tamisé à sec — Rif (Maroc), ex. Ketama", cls:"Hash au tamis (dry-sift)",
+    stats:{Détente:70,Énergie:40,Euphorie:66,Créativité:52,Sommeil:55},
+    desc:"Le hash le plus répandu en Europe. Poudre de résine pressée en plaques, effet équilibré." },
+  { n:23, name:"Afghan Noir", types:["hash"], thc:"20–30%", cbd:"2–5%", terp:"Pressé chaud",
+    flavors:["Épices","Terre","Encens"], aroma:"Épicée et terreuse, presque encens.",
+    origin:"Pressé à la main + eau/chaleur — Afghanistan", cls:"Hash pressé (charas afghan)",
+    stats:{Détente:90,Énergie:18,Euphorie:70,Créativité:34,Sommeil:82},
+    desc:"Noir, souple et collant. Pressage traditionnel donnant un effet lourd et sédatif." },
+  { n:24, name:"Liban Rouge", types:["hash"], thc:"10–20%", cbd:"3–6%", terp:"Affiné",
+    flavors:["Floral","Épicé","Foin"], aroma:"Florale et épicée, notes de foin séché.",
+    origin:"Séché & affiné — vallée de la Bekaa (Liban)", cls:"Hash affiné (dry-sift vieilli)",
+    stats:{Détente:66,Énergie:48,Euphorie:64,Créativité:56,Sommeil:48},
+    desc:"Résine récoltée sur plants matures, séchée puis affinée. Teinte rouge, effet doux et clair." },
+  { n:25, name:"Bubble Hash", types:["concentrate"], thc:"30–60%", cbd:"< 2%", terp:"Full-melt",
+    flavors:["Terpènes purs","Frais","Intense"], aroma:"Profil terpénique intact, très net.",
+    origin:"Extraction eau + glace (ice-o-lator)", cls:"Concentré sans solvant",
+    stats:{Détente:80,Énergie:50,Euphorie:88,Créativité:60,Sommeil:55},
+    desc:"Trichomes séparés à l'eau glacée puis filtrés (microns). Sans solvant, saveur préservée, très puissant." },
+  { n:26, name:"Kief (Pollen)", types:["concentrate"], thc:"20–50%", cbd:"< 2%", terp:"Tamisé sec",
+    flavors:["Concentré","Floral","Piquant"], aroma:"Concentré aromatique de la fleur d'origine.",
+    origin:"Tamisage à sec des trichomes", cls:"Concentré sans solvant (poudre)",
+    stats:{Détente:74,Énergie:52,Euphorie:82,Créativité:58,Sommeil:52},
+    desc:"Poussière de trichomes recueillie au tamis (grinder, sift box). Base de nombreux hashs pressés." },
+  { n:27, name:"Rosin", types:["concentrate"], thc:"60–80%", cbd:"< 3%", terp:"Full-spectrum",
+    flavors:["Terpènes intenses","Pur","Riche"], aroma:"Spectre complet, saveur éclatante.",
+    origin:"Pression à chaud (chaleur + pression)", cls:"Extrait sans solvant premium",
+    stats:{Détente:88,Énergie:48,Euphorie:92,Créativité:55,Sommeil:66},
+    desc:"Extrait obtenu en pressant fleur ou hash à chaud, sans aucun solvant. Pureté et puissance maximales." },
+  { n:28, name:"Temple Ball", types:["hash"], thc:"25–45%", cbd:"1–3%", terp:"Frotté / roulé",
+    flavors:["Sucré","Épicé","Résine"], aroma:"Douce et épicée, résine brillante.",
+    origin:"Roulé à la main — Népal", cls:"Charas façonné en sphère",
+    stats:{Détente:84,Énergie:36,Euphorie:82,Créativité:56,Sommeil:64},
+    desc:"Boule de charas longuement roulée jusqu'à une surface lustrée. Effet enveloppant et méditatif." },
+
+  { n:29, name:"Fresh Frozen (WPFF)", types:["concentrate"], thc:"selon variété", cbd:"selon variété", terp:"Terpènes vivants",
+    flavors:["Plante entière","Frais","Vivant"], aroma:"Profil terpénique intact de la plante fraîche.",
+    origin:"Plante entière congelée à la récolte (Whole Plant Fresh Frozen)", cls:"Matière première premium",
+    stats:{Détente:68,Énergie:48,Euphorie:76,Créativité:55,Sommeil:52},
+    desc:"Pas un produit fini mais LA base des extraits modernes : la plante est flash-congelée juste après la coupe, sans séchage ni curing, pour préserver un maximum de terpènes et de trichomes. Point de départ du live rosin et du live resin." },
+  { n:30, name:"Full Melt 6★ (filtré 3x)", types:["concentrate"], thc:"50–70%", cbd:"< 2%", terp:"Full-melt",
+    flavors:["Terpènes purs","Fondant","Éclatant"], aroma:"Arôme net et intense, sans notes végétales.",
+    origin:"Ice water hash filtré sur plusieurs tamis (ex. 73 / 90 / 120 µm)", cls:"Bubble hash 6 étoiles",
+    stats:{Détente:78,Énergie:52,Euphorie:90,Créativité:58,Sommeil:55},
+    desc:"Le sommet du bubble hash : trichomes séparés à l'eau glacée puis filtrés sur plusieurs micronnages successifs pour ne garder que les têtes de résine. Note « 6 étoiles » = fond totalement sans résidu (full melt)." },
+  { n:31, name:"Frozen Sift", types:["concentrate"], thc:"40–60%", cbd:"< 2%", terp:"Tamis à sec",
+    flavors:["Résine sèche","Piquant","Frais"], aroma:"Sec et résineux, très aromatique.",
+    origin:"Tamisage à sec de matière fresh frozen (ou refroidie)", cls:"Dry sift premium sans solvant",
+    stats:{Détente:72,Énergie:50,Euphorie:80,Créativité:56,Sommeil:52},
+    desc:"Dry sift réalisé sur matière congelée : le froid rend les trichomes cassants et plus faciles à détacher au tamis, pour un kief plus propre et plus blond. Sans eau ni solvant." },
+  { n:32, name:"Static Tech (filtré static)", types:["concentrate"], thc:"45–70%", cbd:"< 2%", terp:"Séparation statique",
+    flavors:["Très pur","Blond","Net"], aroma:"Résine quasi isolée, arôme concentré et propre.",
+    origin:"Sift affiné par électricité statique (film / plaque chargée)", cls:"Dry sift raffiné (full melt)",
+    stats:{Détente:74,Énergie:50,Euphorie:82,Créativité:56,Sommeil:52},
+    desc:"Technique de raffinage : on nettoie un dry sift en séparant les têtes de trichomes de la matière végétale par charge électrostatique. Résultat quasi pur, souvent full-melt, sans passer par l'eau." },
+  { n:33, name:"Live Rosin", types:["concentrate"], thc:"70–85%", cbd:"< 3%", terp:"Full-spectrum vivant",
+    flavors:["Terpènes intenses","Riche","Vivant"], aroma:"Spectre complet, saveur explosive de la plante fraîche.",
+    origin:"Bubble hash WPFF pressé à chaud (sans solvant)", cls:"Extrait solventless haut de gamme",
+    stats:{Détente:85,Énergie:50,Euphorie:94,Créativité:60,Sommeil:62},
+    desc:"Le graal du solventless : on lave de la matière fresh frozen en bubble hash, qu'on presse ensuite à chaud. Aucun solvant, pureté et arôme maximaux. À distinguer du simple rosin (fleur séchée)." },
+  { n:34, name:"Hash Rosin", types:["concentrate"], thc:"60–80%", cbd:"< 3%", terp:"Full-spectrum",
+    flavors:["Résine","Riche","Terpènes"], aroma:"Riche et complet, moins volatil que le live rosin.",
+    origin:"Bubble hash / dry sift de fleur séchée pressé à chaud", cls:"Extrait solventless",
+    stats:{Détente:82,Énergie:48,Euphorie:88,Créativité:56,Sommeil:60},
+    desc:"Rosin pressé à partir de hash (bubble ou sift) issu de matière séchée-curée plutôt que fresh frozen. Excellent rapport qualité/prix, très propre et puissant." },
+  { n:35, name:"Cold Cure / Jar Tech", types:["concentrate"], thc:"65–85%", cbd:"< 3%", terp:"Cure à froid",
+    flavors:["Crémeux","Beurre","Terpènes stables"], aroma:"Onctueux, terpènes préservés par le froid.",
+    origin:"Live rosin curé à froid en bocal scellé (« le cook »)", cls:"Live rosin cold-cured",
+    stats:{Détente:86,Énergie:46,Euphorie:92,Créativité:55,Sommeil:66},
+    desc:"Après pressage, le rosin est mis à « cuire » à froid en bocal fermé : il se stabilise en une texture crémeuse type beurre/sauce (batter, jam) tout en conservant ses terpènes. C'est le fameux « cook »." },
+  { n:36, name:"Piattella", types:["hash","concentrate"], thc:"50–70%", cbd:"< 3%", terp:"Curé à froid",
+    flavors:["Full-melt","Crémeux","Riche"], aroma:"Bouquet dense et raffiné, huileux.",
+    origin:"Full-melt bubble hash curé à froid (Italie) — « petite plaque »", cls:"Hash curé full-melt premium",
+    stats:{Détente:84,Énergie:48,Euphorie:93,Créativité:56,Sommeil:60},
+    desc:"Style italien haut de gamme : du bubble hash 6 étoiles est curé à froid sous vide pendant plusieurs semaines. Il forme une plaque plate lustrée à la texture huileuse. Full-melt, très aromatique." },
+  { n:37, name:"Live Resin", types:["concentrate"], thc:"65–90%", cbd:"< 3%", terp:"Full-spectrum vivant",
+    flavors:["Terpènes vifs","Sauce","Intense"], aroma:"Terpènes très vivants, proche de la plante fraîche.",
+    origin:"Extraction par solvant (BHO) sur matière fresh frozen", cls:"Extrait avec solvant (fresh frozen)",
+    stats:{Détente:80,Énergie:55,Euphorie:90,Créativité:60,Sommeil:55},
+    desc:"Cousin du live rosin mais extrait au solvant (butane/propane) sur du fresh frozen, puis purgé. Textures variées (sauce, badder, diamonds). Très terpéné — contrairement au rosin, ce n'est pas sans solvant." },
+  { n:38, name:"Frozen Bananas — Live Rosin", types:["concentrate"], thc:"75–89%", cbd:"< 2%", terp:"Limonène / Caryophyllène",
+    flavors:["Banane","Tropical","Dessert"], aroma:"Banane mûre et fruits tropicaux crémeux.",
+    origin:"Cultivar « Frozen Bananas » pressé en live rosin (WPFF)", cls:"Live rosin boutique",
+    stats:{Détente:82,Énergie:44,Euphorie:88,Créativité:52,Sommeil:64},
+    desc:"Exemple de live rosin « single strain » très prisé : le cultivar dessert Frozen Bananas, réputé pour son givre et son nez de banane, donne un rosin gourmand, full-melt et corporel." },
+
+  { n:39, name:"Green Crack", types:["sativa"], thc:"15–22%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Mangue","Agrumes","Tropical"], aroma:"Fruitée et acidulée, mangue et citron.",
+    origin:"Skunk #1 × landrace (Athens, USA)", cls:"Sativa pure",
+    stats:{Détente:28,Énergie:90,Euphorie:78,Créativité:80,Sommeil:12},
+    desc:"Malgré son nom, aucun rapport avec la drogue dure : énergie fruitée, focus et bonne humeur. Idéale le jour." },
+  { n:40, name:"Trainwreck", types:["hybrid","sativa"], thc:"18–25%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Pin","Citron","Épicé"], aroma:"Pin piquant, citron et épices.",
+    origin:"Mexican × Thai × Afghani", cls:"Hybride à dominante sativa",
+    stats:{Détente:45,Énergie:80,Euphorie:82,Créativité:78,Sommeil:22},
+    desc:"Montée cérébrale fulgurante (« déraillement »), euphorie créative suivie d'une détente corporelle." },
+  { n:41, name:"UK Cheese", types:["hybrid","indica"], thc:"18–22%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Fromage","Skunk","Terre"], aroma:"Fromage affiné et skunk terreux, très typée.",
+    origin:"Phénotype de Skunk #1 (Royaume-Uni)", cls:"Hybride à dominante indica",
+    stats:{Détente:76,Énergie:42,Euphorie:74,Créativité:48,Sommeil:60},
+    desc:"Arôme fromager inimitable. Détente heureuse et sociable, un classique européen." },
+  { n:42, name:"Super Lemon Haze", types:["sativa"], thc:"18–25%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Citron","Agrumes","Sucré"], aroma:"Citron confit et zeste, très vive.",
+    origin:"Lemon Skunk × Super Silver Haze", cls:"Sativa dominante",
+    stats:{Détente:34,Énergie:86,Euphorie:82,Créativité:76,Sommeil:16},
+    desc:"Double vainqueure de la Cannabis Cup. Zeste de citron pétillant, énergie et bonne humeur." },
+  { n:43, name:"Skunk #1", types:["hybrid"], thc:"15–19%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Skunk","Terre","Sucré"], aroma:"Skunk terreux et doux, l'odeur « originelle ».",
+    origin:"Afghani × Acapulco Gold × Colombian Gold", cls:"Hybride équilibré",
+    stats:{Détente:58,Énergie:60,Euphorie:72,Créativité:58,Sommeil:40},
+    desc:"L'ancêtre de milliers de variétés modernes. Stable, équilibrée, effet joyeux et détendu." },
+  { n:44, name:"Do-Si-Dos", types:["indica"], thc:"20–30%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Sucré","Terre","Floral"], aroma:"Douce et florale sur fond terreux.",
+    origin:"OGKB (GSC) × Face Off OG", cls:"Indica dominante",
+    stats:{Détente:90,Énergie:18,Euphorie:80,Créativité:34,Sommeil:86},
+    desc:"Puissante et sédative, effet corporel enveloppant. Idéale en soirée pour décrocher." },
+  { n:45, name:"Mimosa", types:["hybrid","sativa"], thc:"19–27%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Orange","Agrumes","Tropical"], aroma:"Orange sanguine et fruits tropicaux.",
+    origin:"Clementine × Purple Punch", cls:"Hybride à dominante sativa",
+    stats:{Détente:40,Énergie:82,Euphorie:80,Créativité:70,Sommeil:18},
+    desc:"Comme le cocktail : pétillante et solaire. Énergie claire et humeur ensoleillée." },
+  { n:46, name:"Chemdawg", types:["hybrid"], thc:"18–26%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Diesel","Terre","Piquant"], aroma:"Diesel âcre et terreux, très pénétrant.",
+    origin:"Génétique légendaire (parent de OG Kush & Sour Diesel)", cls:"Hybride puissant",
+    stats:{Détente:62,Énergie:58,Euphorie:82,Créativité:64,Sommeil:38},
+    desc:"Souche mère mythique. Effet cérébral intense et lourd, arôme carburant caractéristique." },
+  { n:47, name:"Purple Punch", types:["indica"], thc:"18–20%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Raisin","Baies","Bonbon"], aroma:"Raisin et myrtille sucrés, note de bonbon.",
+    origin:"Larry OG × Granddaddy Purple", cls:"Indica pure",
+    stats:{Détente:88,Énergie:20,Euphorie:76,Créativité:32,Sommeil:84},
+    desc:"Dessert du soir : arôme de raisin, détente lourde et sommeil facile." },
+  { n:48, name:"Strawberry Cough", types:["sativa"], thc:"15–20%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Fraise","Baies","Sucré"], aroma:"Fraise mûre et sucrée.",
+    origin:"Strawberry Fields × Haze (probable)", cls:"Sativa dominante",
+    stats:{Détente:44,Énergie:76,Euphorie:80,Créativité:70,Sommeil:22},
+    desc:"Nez de fraise et effet cérébral lumineux, sociable. Peut faire tousser, d'où le nom." },
+  { n:49, name:"Bruce Banner", types:["hybrid"], thc:"24–29%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Diesel","Sucré","Terre"], aroma:"Diesel sucré et terreux.",
+    origin:"OG Kush × Strawberry Diesel", cls:"Hybride à dominante sativa",
+    stats:{Détente:64,Énergie:70,Euphorie:88,Créativité:66,Sommeil:34},
+    desc:"Du nom de l'alter ego de Hulk : montée puissante et euphorique, parmi les plus fortes en THC." },
+  { n:50, name:"MAC", types:["hybrid"], thc:"20–23%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Agrumes","Floral","Crémeux"], aroma:"Agrumes crémeux et notes florales.",
+    origin:"Alien Cookies × (Colombian × Starfighter)", cls:"Hybride équilibré",
+    stats:{Détente:66,Énergie:56,Euphorie:82,Créativité:62,Sommeil:44},
+    desc:"« Miracle Alien Cookies » : équilibrée, euphorie créative et détente douce. Très givrée." },
+
+  { n:51, name:"Bubble 73µ (Full Melt)", types:["concentrate"], thc:"45–65%", cbd:"< 2%", terp:"Full-melt",
+    flavors:["Têtes pures","Fondant","Éclatant"], aroma:"Résine la plus pure, arôme net et puissant.",
+    origin:"Fraction 73 microns de l'ice water hash", cls:"Bubble hash — tête de résine",
+    stats:{Détente:78,Énergie:52,Euphorie:88,Créativité:56,Sommeil:54},
+    desc:"La fraction reine du bubble hash : ce micronnage capture les têtes de trichomes les plus intactes. Full-melt, parfait à dabber." },
+  { n:52, name:"Bubble 120µ (Half Melt)", types:["concentrate"], thc:"40–55%", cbd:"< 2%", terp:"Half-melt",
+    flavors:["Résine","Doux","Fondant"], aroma:"Riche, fond en partie sans être totalement pur.",
+    origin:"Fraction 120 microns de l'ice water hash", cls:"Bubble hash — demi-fonte",
+    stats:{Détente:74,Énergie:48,Euphorie:80,Créativité:52,Sommeil:56},
+    desc:"Fraction un peu plus grosse : excellente à saupoudrer sur un bol, en pré-roulé ou à presser en rosin. Fond partiellement." },
+  { n:53, name:"Bubble 180µ (Food Grade)", types:["concentrate"], thc:"30–45%", cbd:"< 2%", terp:"Food grade",
+    flavors:["Végétal","Terre","Brut"], aroma:"Plus végétale, contient de plus grosses têtes.",
+    origin:"Fraction 160–220 microns de l'ice water hash (« 180u »)", cls:"Bubble hash — qualité cuisine",
+    stats:{Détente:66,Énergie:44,Euphorie:68,Créativité:46,Sommeil:52},
+    desc:"Micronnage large : mélange de grosses têtes et de matière, moins fait pour le dab. Idéal pour cuisiner (edibles) ou à presser en rosin." },
+  { n:54, name:"Blond (Jaune)", types:["hash"], thc:"20–40%", cbd:"1–4%", terp:"Tamis à sec",
+    flavors:["Doux","Floral","Épicé"], aroma:"Douce et florale, résine dorée fraîche.",
+    origin:"Dry sift blond doré, peu pressé (pollen de qualité)", cls:"Hash blond au tamis",
+    stats:{Détente:70,Énergie:46,Euphorie:70,Créativité:52,Sommeil:54},
+    desc:"Le « jaune » : dry sift blond doré, peu compressé et poudreux, signe d'une résine fraîche et propre. Souple, savoureux, effet équilibré." },
+
+  { n:55, name:"Wedding Crasher", types:["hybrid"], thc:"18–24%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Vanille","Raisin","Sucré"], aroma:"Gâteau vanillé et raisin frais.",
+    origin:"Wedding Cake × Purple Punch", cls:"Hybride équilibré",
+    stats:{Détente:70,Énergie:56,Euphorie:82,Créativité:58,Sommeil:46},
+    desc:"Dessert gazeux : euphorie pétillante suivie d'une détente douce et sociable." },
+  { n:56, name:"Apple Fritter", types:["hybrid"], thc:"22–28%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Pomme","Sucré","Terre"], aroma:"Beignet aux pommes sucré et terreux.",
+    origin:"Sour Apple × Animal Cookies", cls:"Hybride puissant",
+    stats:{Détente:74,Énergie:52,Euphorie:86,Créativité:56,Sommeil:50},
+    desc:"Très puissante, saveur de pâtisserie. Euphorie franche puis relaxation corporelle." },
+  { n:57, name:"Biscotti", types:["indica","hybrid"], thc:"21–25%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Biscuit","Sucré","Diesel"], aroma:"Biscuit sucré et pointe de diesel.",
+    origin:"Gelato #25 × South Florida OG × GSC", cls:"Hybride à dominante indica",
+    stats:{Détente:80,Énergie:40,Euphorie:82,Créativité:48,Sommeil:60},
+    desc:"Détente corporelle profonde avec un mental clair, arôme de biscuit toasté." },
+  { n:58, name:"Sunset Sherbet", types:["hybrid","indica"], thc:"18–24%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Baies","Agrumes","Crémeux"], aroma:"Sorbet fruité et crémeux.",
+    origin:"Girl Scout Cookies × Pink Panties", cls:"Hybride à dominante indica",
+    stats:{Détente:76,Énergie:46,Euphorie:82,Créativité:54,Sommeil:52},
+    desc:"Détente heureuse et gourmande. Parent de nombreuses Gelato modernes." },
+  { n:59, name:"Kush Mints", types:["hybrid"], thc:"22–26%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Menthe","Café","Terre"], aroma:"Menthe fraîche et café terreux.",
+    origin:"Bubba Kush × Animal Mints", cls:"Hybride équilibré",
+    stats:{Détente:80,Énergie:44,Euphorie:82,Créativité:50,Sommeil:58},
+    desc:"Puissante et mentholée, détente équilibrée et durable." },
+  { n:60, name:"Ice Cream Cake", types:["indica"], thc:"20–25%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Vanille","Sucré","Crémeux"], aroma:"Glace vanille et pâte à gâteau.",
+    origin:"Wedding Cake × Gelato #33", cls:"Indica dominante",
+    stats:{Détente:88,Énergie:24,Euphorie:80,Créativité:36,Sommeil:82},
+    desc:"Crémeuse et sédative, parfaite pour la détente du soir." },
+  { n:61, name:"Cereal Milk", types:["hybrid"], thc:"18–23%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Lait sucré","Fruité","Crémeux"], aroma:"Lait de céréales sucré.",
+    origin:"Y-Life × Snowman", cls:"Hybride équilibré",
+    stats:{Détente:66,Énergie:56,Euphorie:80,Créativité:58,Sommeil:44},
+    desc:"Douceur lactée en bouche, effet équilibré et détendu." },
+  { n:62, name:"Jealousy", types:["hybrid"], thc:"20–27%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Sucré","Fruité","Diesel"], aroma:"Fruité sucré avec une pointe de diesel.",
+    origin:"Gelato #41 × Sherbet", cls:"Hybride équilibré",
+    stats:{Détente:70,Énergie:58,Euphorie:86,Créativité:58,Sommeil:44},
+    desc:"Souche primée récente : euphorie forte et détente lucide." },
+  { n:63, name:"Gary Payton", types:["hybrid"], thc:"20–25%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Diesel","Herbacé","Épicé"], aroma:"Diesel herbacé et épicé.",
+    origin:"The Y × Snowman", cls:"Hybride équilibré",
+    stats:{Détente:68,Énergie:60,Euphorie:84,Créativité:60,Sommeil:42},
+    desc:"Effet puissant et bien équilibré, phare de la « Cookies fam »." },
+  { n:64, name:"Lemon Cherry Gelato", types:["hybrid","indica"], thc:"19–28%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Cerise","Citron","Sucré"], aroma:"Cerise et citron sucrés.",
+    origin:"Sunset Sherbet × Girl Scout Cookies", cls:"Hybride à dominante indica",
+    stats:{Détente:74,Énergie:50,Euphorie:86,Créativité:54,Sommeil:52},
+    desc:"Très givrée et gourmande, détente euphorique enveloppante." },
+  { n:65, name:"Georgia Pie", types:["hybrid"], thc:"20–26%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Pêche","Sucré","Crémeux"], aroma:"Tarte à la pêche sucrée.",
+    origin:"Gelatti × Kush Mints", cls:"Hybride équilibré",
+    stats:{Détente:74,Énergie:48,Euphorie:82,Créativité:52,Sommeil:54},
+    desc:"Nez de pêche prononcé, détente douce et enveloppante." },
+  { n:66, name:"Oreoz", types:["indica","hybrid"], thc:"23–28%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Chocolat","Biscuit","Sucré"], aroma:"Cookie au chocolat.",
+    origin:"Cookies and Cream × Secret Weapon", cls:"Hybride à dominante indica",
+    stats:{Détente:84,Énergie:34,Euphorie:84,Créativité:44,Sommeil:66},
+    desc:"Très puissante, arôme chocolaté, détente lourde et heureuse." },
+  { n:67, name:"Grape Ape", types:["indica"], thc:"15–23%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Raisin","Baies","Sucré"], aroma:"Raisin sucré et terreux.",
+    origin:"Mendocino Purps × Skunk × Afghani", cls:"Indica pure",
+    stats:{Détente:88,Énergie:16,Euphorie:70,Créativité:28,Sommeil:86},
+    desc:"Indica pourpre très relaxante, arôme de raisin, anti-stress efficace." },
+  { n:68, name:"Master Kush", types:["indica"], thc:"16–24%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Terre","Agrumes","Encens"], aroma:"Terreuse avec une note d'encens.",
+    origin:"Hindu Kush × Skunk", cls:"Indica pure",
+    stats:{Détente:86,Énergie:20,Euphorie:68,Créativité:30,Sommeil:82},
+    desc:"Classique des coffee-shops d'Amsterdam, détente lourde mais lucide." },
+  { n:69, name:"Hindu Kush", types:["indica"], thc:"15–20%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Terre","Santal","Doux"], aroma:"Bois de santal et terre douce.",
+    origin:"Landrace — chaîne de l'Hindou Kouch", cls:"Indica landrace pure",
+    stats:{Détente:90,Énergie:14,Euphorie:64,Créativité:26,Sommeil:88},
+    desc:"Landrace ancestrale, base de nombreuses indicas. Sa résine abondante est idéale pour le hash." },
+  { n:70, name:"Afghani", types:["indica"], thc:"17–24%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Terre","Sucré","Épicé"], aroma:"Terreuse, douce et très résineuse.",
+    origin:"Landrace afghane", cls:"Indica landrace pure",
+    stats:{Détente:90,Énergie:15,Euphorie:66,Créativité:26,Sommeil:88},
+    desc:"Souche mère du hash afghan, ultra résineuse et profondément sédative." },
+  { n:71, name:"LA Confidential", types:["indica"], thc:"18–25%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Pin","Terre","Épicé"], aroma:"Pin et terre épicée.",
+    origin:"Afghani × California Indica", cls:"Indica pure",
+    stats:{Détente:88,Énergie:18,Euphorie:72,Créativité:30,Sommeil:84},
+    desc:"Détente rapide et profonde, très appréciée pour un usage médical du soir." },
+  { n:72, name:"Blackberry Kush", types:["indica"], thc:"16–20%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Mûre","Baies","Diesel"], aroma:"Mûre sucrée sur fond de diesel.",
+    origin:"Afghani × Blackberry", cls:"Indica pure",
+    stats:{Détente:88,Énergie:16,Euphorie:74,Créativité:28,Sommeil:86},
+    desc:"Arôme de mûre marqué, effet corporel lourd et apaisant." },
+  { n:73, name:"Cherry Pie", types:["hybrid"], thc:"16–24%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Cerise","Sucré","Terre"], aroma:"Tarte aux cerises sucrée.",
+    origin:"Granddaddy Purple × Durban Poison", cls:"Hybride équilibré",
+    stats:{Détente:66,Énergie:58,Euphorie:80,Créativité:60,Sommeil:42},
+    desc:"Nez de cerise gourmand, effet joyeux, détendu et sociable." },
+  { n:74, name:"Tangie", types:["sativa"], thc:"19–22%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Mandarine","Agrumes","Sucré"], aroma:"Mandarine juteuse et zeste.",
+    origin:"California Orange × Skunk", cls:"Sativa dominante",
+    stats:{Détente:36,Énergie:84,Euphorie:82,Créativité:80,Sommeil:16},
+    desc:"Explosion d'agrumes, énergie créative et humeur sociable." },
+  { n:75, name:"Maui Wowie", types:["sativa"], thc:"15–20%", cbd:"< 1%", terp:"Ocimène",
+    flavors:["Ananas","Tropical","Agrumes"], aroma:"Ananas et fruits tropicaux.",
+    origin:"Landrace hawaïenne", cls:"Sativa dominante",
+    stats:{Détente:38,Énergie:82,Euphorie:82,Créativité:74,Sommeil:18},
+    desc:"Classique tropicale, énergie légère et euphorie ensoleillée façon plage." },
+  { n:76, name:"Acapulco Gold", types:["sativa"], thc:"15–23%", cbd:"< 1%", terp:"Pinène",
+    flavors:["Café","Terre","Agrumes"], aroma:"Café doré et agrumes.",
+    origin:"Landrace mexicaine (Acapulco)", cls:"Sativa landrace",
+    stats:{Détente:40,Énergie:82,Euphorie:82,Créativité:76,Sommeil:16},
+    desc:"Légende dorée des années 70, énergie propre et euphorie durable." },
+  { n:77, name:"Panama Red", types:["sativa"], thc:"16–22%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Terre","Épices","Doux"], aroma:"Terreuse et épicée.",
+    origin:"Landrace panaméenne", cls:"Sativa landrace",
+    stats:{Détente:34,Énergie:86,Euphorie:80,Créativité:80,Sommeil:14},
+    desc:"Sativa vintage à montée lente et planante, culte des années 60-70." },
+  { n:78, name:"Ghost Train Haze", types:["sativa"], thc:"21–27%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Citron","Floral","Pin"], aroma:"Citron floral et pin résineux.",
+    origin:"Ghost OG × Neville's Wreck", cls:"Sativa dominante",
+    stats:{Détente:32,Énergie:88,Euphorie:84,Créativité:82,Sommeil:14},
+    desc:"Ultra puissante et cérébrale, à réserver aux consommateurs expérimentés." },
+  { n:79, name:"Lamb's Bread", types:["sativa"], thc:"16–21%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Herbe","Épices","Fromage"], aroma:"Herbacée et légèrement épicée.",
+    origin:"Landrace jamaïcaine", cls:"Sativa landrace",
+    stats:{Détente:34,Énergie:86,Euphorie:84,Créativité:80,Sommeil:14},
+    desc:"La « Lamb's Breath » jamaïcaine : énergie positive et créative, réputée chère à Bob Marley." },
+  { n:80, name:"Candyland", types:["sativa","hybrid"], thc:"18–24%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Bonbon","Sucré","Épicé"], aroma:"Bonbon sucré et épices.",
+    origin:"Granddaddy Purple × Bay Platinum Cookies", cls:"Hybride à dominante sativa",
+    stats:{Détente:44,Énergie:76,Euphorie:80,Créativité:72,Sommeil:22},
+    desc:"Douceur sucrée, énergie sociable et bonne concentration." },
+  { n:81, name:"Cinderella 99", types:["sativa","hybrid"], thc:"18–22%", cbd:"< 1%", terp:"Terpinolène",
+    flavors:["Ananas","Agrumes","Sucré"], aroma:"Ananas et agrumes sucrés.",
+    origin:"Jack Herer × Shiva Skunk", cls:"Hybride à dominante sativa",
+    stats:{Détente:38,Énergie:82,Euphorie:84,Créativité:80,Sommeil:16},
+    desc:"« Cindy » : montée euphorique et rêveuse, saveur tropicale." },
+  { n:82, name:"Pink Kush", types:["indica"], thc:"20–25%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Vanille","Floral","Sucré"], aroma:"Vanille florale sucrée.",
+    origin:"Proche génétique de OG Kush", cls:"Indica pure",
+    stats:{Détente:90,Énergie:18,Euphorie:78,Créativité:30,Sommeil:86},
+    desc:"Indica corporelle puissante, arôme floral vanillé, sommeil quasi garanti." },
+  { n:83, name:"Forbidden Fruit", types:["indica"], thc:"20–26%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Cerise","Agrumes","Tropical"], aroma:"Cerise et agrumes tropicaux.",
+    origin:"Cherry Pie × Tangie", cls:"Indica dominante",
+    stats:{Détente:84,Énergie:30,Euphorie:80,Créativité:44,Sommeil:70},
+    desc:"Fruitée et résineuse, détente profonde et très gourmande." },
+  { n:84, name:"Cookies and Cream", types:["hybrid"], thc:"20–24%", cbd:"< 1%", terp:"Caryophyllène",
+    flavors:["Vanille","Sucré","Noisette"], aroma:"Biscuit vanillé et noisette.",
+    origin:"Starfighter × Girl Scout Cookies", cls:"Hybride équilibré",
+    stats:{Détente:72,Énergie:52,Euphorie:82,Créativité:56,Sommeil:50},
+    desc:"Vainqueure de Cannabis Cup, équilibre parfait entre corps et tête." },
+  { n:85, name:"Tahoe OG", types:["indica"], thc:"18–24%", cbd:"< 1%", terp:"Myrcène",
+    flavors:["Citron","Terre","Carburant"], aroma:"Citron terreux et diesel.",
+    origin:"Phénotype d'OG Kush (Lake Tahoe)", cls:"Indica dominante",
+    stats:{Détente:86,Énergie:22,Euphorie:76,Créativité:34,Sommeil:80},
+    desc:"OG lourde à action rapide, souvent citée contre l'insomnie." },
+  { n:86, name:"Banana Kush", types:["indica","hybrid"], thc:"16–20%", cbd:"< 1%", terp:"Limonène",
+    flavors:["Banane","Tropical","Sucré"], aroma:"Banane mûre crémeuse.",
+    origin:"Ghost OG × Skunk Haze", cls:"Hybride à dominante indica",
+    stats:{Détente:78,Énergie:40,Euphorie:78,Créativité:48,Sommeil:60},
+    desc:"Nez de banane crémeux, détente douce et rêveuse." },
+
+  { n:87, name:"Pollen (plaque)", types:["hash"], thc:"15–30%", cbd:"2–5%", terp:"Tamis pressé",
+    flavors:["Terre","Épices","Doux"], aroma:"Terreuse et douce, classique.",
+    origin:"Dry sift pressé en plaque (Maroc, Europe)", cls:"Hash pressé au tamis",
+    stats:{Détente:72,Énergie:44,Euphorie:68,Créativité:50,Sommeil:56},
+    desc:"Le hash de plaque le plus répandu : pollen tamisé puis compressé, souple et facile à émietter en chauffant." },
+  { n:88, name:"Zero-Zero (00)", types:["hash"], thc:"20–35%", cbd:"2–5%", terp:"Tamis fin",
+    flavors:["Doux","Floral","Crémeux"], aroma:"Douce, florale et crémeuse.",
+    origin:"Dry sift marocain premium (double tamisage)", cls:"Hash marocain haut de gamme",
+    stats:{Détente:78,Énergie:42,Euphorie:74,Créativité:52,Sommeil:58},
+    desc:"Le « double zéro » : qualité supérieure du hash marocain, tamisage plus fin donnant une résine plus pure et blonde." },
+  { n:89, name:"Malana Cream", types:["hash"], thc:"25–40%", cbd:"1–3%", terp:"Frotté main",
+    flavors:["Épices","Fleur","Crème"], aroma:"Crémeuse et épicée, résine vivante.",
+    origin:"Charas frotté main — vallée de Malana (Inde)", cls:"Charas indien premium",
+    stats:{Détente:84,Énergie:34,Euphorie:82,Créativité:56,Sommeil:62},
+    desc:"Charas légendaire de la vallée de Malana : souple, brillant et très aromatique." },
+  { n:90, name:"Pakistani", types:["hash"], thc:"18–30%", cbd:"2–5%", terp:"Pressé",
+    flavors:["Épices","Terre","Doux"], aroma:"Épicée et terreuse, huileuse.",
+    origin:"Pressé — région du Cachemire (Pakistan)", cls:"Hash pressé traditionnel",
+    stats:{Détente:86,Énergie:22,Euphorie:70,Créativité:34,Sommeil:80},
+    desc:"Hash noir souple et huileux, proche de l'afghan. Effet lourd et relaxant." },
+  { n:91, name:"Squidgy Black", types:["hash"], thc:"15–28%", cbd:"2–5%", terp:"Pressé mou",
+    flavors:["Épices","Terre","Encens"], aroma:"Terreuse et encens, très souple.",
+    origin:"Hash noir mou (import UK, origine Afghanistan/Pakistan)", cls:"Hash noir souple",
+    stats:{Détente:86,Énergie:20,Euphorie:68,Créativité:32,Sommeil:80},
+    desc:"Le « squidgy black » britannique : extrêmement mou et collant, effet sédatif marqué." },
+  { n:92, name:"Bubble 45µ (Micro Full Melt)", types:["concentrate"], thc:"45–65%", cbd:"< 2%", terp:"Full-melt fin",
+    flavors:["Têtes fines","Pur","Fondant"], aroma:"Résine très fine, arôme délicat.",
+    origin:"Fraction 45 microns de l'ice water hash", cls:"Bubble hash — micro têtes",
+    stats:{Détente:78,Énergie:52,Euphorie:88,Créativité:56,Sommeil:54},
+    desc:"Micronnage très fin capturant les plus petites têtes de trichomes. Full-melt délicat et propre." },
+  { n:93, name:"Bubble 90µ", types:["concentrate"], thc:"42–60%", cbd:"< 2%", terp:"Full / half-melt",
+    flavors:["Résine","Fondant","Riche"], aroma:"Riche et fondante.",
+    origin:"Fraction 90 microns de l'ice water hash", cls:"Bubble hash — fraction premium",
+    stats:{Détente:76,Énergie:50,Euphorie:84,Créativité:54,Sommeil:54},
+    desc:"Avec le 73µ, l'une des meilleures fractions : bel équilibre pureté/rendement, souvent full-melt." },
+  { n:94, name:"THCA Diamonds & Sauce", types:["concentrate"], thc:"70–95%", cbd:"< 2%", terp:"Cristaux + sauce",
+    flavors:["Cristaux","Sauce","Intense"], aroma:"Sauce terpénée intense et cristaux purs.",
+    origin:"Extraction solvant : cristaux de THCA dans la sauce terpénique", cls:"Extrait avec solvant (haute pureté)",
+    stats:{Détente:80,Énergie:52,Euphorie:94,Créativité:58,Sommeil:56},
+    desc:"Cristaux de THCA d'une pureté extrême noyés dans une sauce riche en terpènes. Parmi les concentrés les plus puissants." },
+  { n:95, name:"Budder / Badder", types:["concentrate"], thc:"60–85%", cbd:"< 2%", terp:"Fouetté",
+    flavors:["Beurre","Crémeux","Riche"], aroma:"Onctueux et riche.",
+    origin:"Extrait (solvant ou rosin) fouetté en texture beurre", cls:"Concentré texture beurre",
+    stats:{Détente:80,Énergie:50,Euphorie:88,Créativité:56,Sommeil:56},
+    desc:"Concentré fouetté jusqu'à une texture crémeuse type beurre ou pâte, facile à doser au dab." },
+  { n:96, name:"Shatter", types:["concentrate"], thc:"70–90%", cbd:"< 2%", terp:"Ambré vitreux",
+    flavors:["Verre","Pur","Net"], aroma:"Net, ambré, cassant.",
+    origin:"Extraction butane (BHO) stabilisée en plaque vitreuse", cls:"Extrait avec solvant (vitreux)",
+    stats:{Détente:78,Énergie:52,Euphorie:90,Créativité:56,Sommeil:52},
+    desc:"Concentré translucide et cassant comme du verre. Très puissant, se consomme au dab." },
+  { n:97, name:"Wax / Crumble", types:["concentrate"], thc:"60–85%", cbd:"< 2%", terp:"Cireux",
+    flavors:["Cire","Friable","Riche"], aroma:"Riche et cireuse.",
+    origin:"Extraction butane (BHO) en texture cire ou friable", cls:"Extrait avec solvant (cireux)",
+    stats:{Détente:78,Énergie:50,Euphorie:86,Créativité:54,Sommeil:54},
+    desc:"Concentré opaque et cireux (friable pour le crumble), maniable et facile à doser." },
+  { n:98, name:"Distillat", types:["concentrate"], thc:"85–99%", cbd:"< 1%", terp:"THC isolé",
+    flavors:["Neutre","Pur","Puissant"], aroma:"Quasi inodore, extrêmement puissant.",
+    origin:"Distillation moléculaire (cannabinoïdes isolés)", cls:"Extrait ultra-raffiné (sans terpènes)",
+    stats:{Détente:74,Énergie:48,Euphorie:82,Créativité:48,Sommeil:56},
+    desc:"Huile ultra-pure en THC mais dépouillée de terpènes (souvent réajoutés ensuite). Base des vapes et cartouches." },
+  { n:99, name:"Moon Rock", types:["concentrate"], thc:"40–60%", cbd:"< 2%", terp:"Fleur enrobée",
+    flavors:["Puissant","Résineux","Riche"], aroma:"Très résineuse et dense.",
+    origin:"Fleur trempée dans l'huile de hash puis roulée dans le kief", cls:"Fleur + concentré + kief",
+    stats:{Détente:84,Énergie:40,Euphorie:88,Créativité:48,Sommeil:64},
+    desc:"Bourgeon enrobé d'huile puis roulé dans le kief : véritable bombe de puissance, à fumer avec parcimonie." },
+  { n:100, name:"Caviar", types:["concentrate"], thc:"40–65%", cbd:"< 2%", terp:"Fleur + sauce",
+    flavors:["Riche","Résineux","Intense"], aroma:"Riche, collant et très aromatique.",
+    origin:"Fleur premium enrobée de concentré (sauce / rosin) — cousin du Moon Rock", cls:"Fleur haut de gamme enrobée",
+    stats:{Détente:84,Énergie:42,Euphorie:88,Créativité:50,Sommeil:62},
+    desc:"La version « caviar » : têtes premium nappées de concentré, saveur intense et puissance maximale. Le nº 100 du Pokédef." },
+];
+
+/* ---------------- Spécimens SVG (dessinés) ---------------- */
+function leafSVG(color) {
+  // Feuille de cannabis stylisée : 7 folioles dentelées rayonnantes + tige
+  const angles = [0, 26, -26, 50, -50, 72, -72];
+  const lens   = [1, 0.9, 0.9, 0.72, 0.72, 0.5, 0.5];
+  let leaflets = "";
+  angles.forEach((a, i) => {
+    const L = lens[i];
+    // foliole pointue avec bords dentelés
+    const d = `M0,4 C ${-5*L},${-14*L} ${-7*L},${-40*L} ${-3.4*L},${-58*L}
+               L ${-6.2*L},${-52*L} L ${-3*L},${-64*L}
+               L ${-5*L},${-60*L} L 0,${-84*L}
+               L ${5*L},${-60*L} L ${3*L},${-64*L}
+               L ${6.2*L},${-52*L} L ${3.4*L},${-58*L}
+               C ${7*L},${-40*L} ${5*L},${-14*L} 0,4 Z`;
+    leaflets += `<path d="${d}" transform="rotate(${a})" fill="${color}"/>`;
+  });
+  return `<svg viewBox="-90 -96 180 116" role="img" aria-label="feuille">
+    <g transform="translate(0,-4)">${leaflets}</g>
+    <path d="M0,4 C 2,20 3,30 2,40" fill="none" stroke="${color}" stroke-width="3.4" stroke-linecap="round"/>
+  </svg>`;
+}
+let __uid = 0;
+function uid(){ return "sp" + (++__uid); }
+
+/* Boule de charas lustrée (Charas, Temple Ball, Malana) */
+function hashBall(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="boule de hash">
+    <defs><radialGradient id="${g}" cx="37%" cy="30%" r="78%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.55"/>
+      <stop offset="26%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.68"/>
+    </radialGradient></defs>
+    <ellipse cx="60" cy="101" rx="33" ry="6.5" fill="#000" opacity="0.13"/>
+    <circle cx="60" cy="60" r="42" fill="url(#${g})"/>
+    <circle cx="60" cy="60" r="42" fill="none" stroke="${color}" stroke-opacity="0.45" stroke-width="1.4"/>
+    <ellipse cx="45" cy="41" rx="13" ry="8" fill="#fff" opacity="0.38"/>
+    <g fill="#000" opacity="0.10">
+      <circle cx="73" cy="70" r="4"/><circle cx="57" cy="80" r="3"/>
+      <circle cx="82" cy="54" r="2.6"/><circle cx="49" cy="66" r="2.4"/><circle cx="66" cy="58" r="2"/>
+    </g>
+  </svg>`;
+}
+/* Plaque pressée en 3D isométrique (Marocain, Afghan, Liban, Pakistani, Squidgy, Pollen, 00) */
+function hashBrick(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="plaque de hash pressée">
+    <defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.28"/><stop offset="100%" stop-color="${color}"/>
+    </linearGradient></defs>
+    <ellipse cx="60" cy="101" rx="42" ry="7" fill="#000" opacity="0.12"/>
+    <polygon points="60,32 98,52 60,72 22,52" fill="url(#${g})"/>
+    <polygon points="22,52 60,72 60,98 22,80" fill="${color}" fill-opacity="0.7"/>
+    <polygon points="60,72 98,52 98,80 60,98" fill="${color}" fill-opacity="0.9"/>
+    <polygon points="60,32 98,52 60,72 22,52" fill="none" stroke="#fff" stroke-opacity="0.2" stroke-width="1.3"/>
+    <path d="M41,42 L79,62 M60,32 L60,72" stroke="#fff" stroke-opacity="0.13" stroke-width="1.3"/>
+    <rect x="29" y="60" width="12" height="5" rx="2" fill="#fff" opacity="0.10"/>
+  </svg>`;
+}
+/* Monticule de poudre / pollen (Kief, Dry Sift, Frozen Sift, Static, Blond) */
+function siftPile(color){
+  const g = uid();
+  const dots = [[52,70,1.6],[66,66,1.4],[60,79,1.7],[74,78,1.4],[44,82,1.5],[82,84,1.4],[58,60,1.3],[70,74,1.5],[50,77,1.4],[38,86,1.3]];
+  const spark = dots.map((d,i)=>`<circle cx="${d[0]}" cy="${d[1]}" r="${d[2]}" fill="${i%3?'#fff':color}" opacity="0.55"/>`).join("");
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="poudre de résine">
+    <defs><linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/><stop offset="100%" stop-color="${color}"/>
+    </linearGradient></defs>
+    <ellipse cx="60" cy="93" rx="43" ry="9" fill="#000" opacity="0.10"/>
+    <path d="M20 90 Q60 40 100 90 Z" fill="url(#${g})"/>
+    <path d="M20 90 Q60 40 100 90" fill="none" stroke="${color}" stroke-opacity="0.45" stroke-width="1.4"/>
+    ${spark}
+  </svg>`;
+}
+/* Amas de nuggets fondants (Bubble hash, Full Melt, micronnages) */
+function bubbleHash(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="bubble hash">
+    <defs><radialGradient id="${g}" cx="34%" cy="28%" r="78%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.5"/>
+      <stop offset="30%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.68"/>
+    </radialGradient></defs>
+    <ellipse cx="60" cy="99" rx="40" ry="8" fill="#000" opacity="0.12"/>
+    <circle cx="47" cy="70" r="21" fill="url(#${g})"/>
+    <circle cx="77" cy="65" r="17" fill="url(#${g})"/>
+    <circle cx="64" cy="85" r="15" fill="url(#${g})"/>
+    <circle cx="40" cy="50" r="12" fill="url(#${g})"/>
+    <circle cx="86" cy="82" r="9" fill="url(#${g})"/>
+    <g fill="#fff" opacity="0.4"><circle cx="41" cy="62" r="4"/><circle cx="72" cy="59" r="3.4"/><circle cx="35" cy="46" r="2.4"/></g>
+  </svg>`;
+}
+/* Goutte d'extrait brillante étirée à l'outil (Rosin, Live Rosin, Cold Cure, Budder, Live Resin, Piattella, Wax) */
+function dabGlob(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="extrait solventless">
+    <defs><radialGradient id="${g}" cx="38%" cy="30%" r="82%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.6"/>
+      <stop offset="35%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.74"/>
+    </radialGradient></defs>
+    <ellipse cx="56" cy="99" rx="35" ry="7.5" fill="#000" opacity="0.12"/>
+    <path d="M96 18 L70 56" stroke="${color}" stroke-opacity="0.5" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="97" cy="16" r="5.5" fill="${color}" fill-opacity="0.7"/>
+    <path d="M38 62 Q30 88 54 92 Q86 96 88 66 Q89 48 64 52 Q68 38 58 42 Q44 48 38 62 Z" fill="url(#${g})"/>
+    <path d="M70 54 Q78 50 74 60" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+    <ellipse cx="52" cy="68" rx="10" ry="6" fill="#fff" opacity="0.4"/>
+  </svg>`;
+}
+/* Éclat vitreux ambré (Shatter) */
+function shatterShard(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="shatter vitreux">
+    <defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.55"/>
+      <stop offset="42%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.66"/>
+    </linearGradient></defs>
+    <ellipse cx="60" cy="99" rx="35" ry="6.5" fill="#000" opacity="0.10"/>
+    <polygon points="38,32 94,44 84,94 32,80 48,56" fill="url(#${g})"/>
+    <polygon points="38,32 94,44 84,94 32,80 48,56" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M38,32 L62,64 L84,94 M94,44 L62,64 L32,80" stroke="#fff" stroke-opacity="0.22" stroke-width="1.1" fill="none"/>
+    <polygon points="46,44 58,47 52,58" fill="#fff" opacity="0.35"/>
+  </svg>`;
+}
+/* Cristaux de THCA dans la sauce (Diamonds & Sauce) */
+function diamondsSauce(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="diamants et sauce">
+    <defs><radialGradient id="${g}" cx="40%" cy="34%" r="76%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+      <stop offset="40%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.7"/>
+    </radialGradient></defs>
+    <ellipse cx="60" cy="98" rx="40" ry="8" fill="#000" opacity="0.12"/>
+    <path d="M26 82 Q24 58 60 56 Q98 58 94 82 Q92 96 60 96 Q28 96 26 82 Z" fill="url(#${g})"/>
+    <g stroke="#fff" stroke-opacity="0.65" stroke-width="1.2" stroke-linejoin="round">
+      <polygon points="47,56 59,62 52,78 42,69" fill="#fff" fill-opacity="0.55"/>
+      <polygon points="66,54 80,61 73,77 62,69" fill="#fff" fill-opacity="0.48"/>
+      <polygon points="57,74 66,78 61,89 51,84" fill="#fff" fill-opacity="0.42"/>
+    </g>
+  </svg>`;
+}
+/* Pipette / seringue d'huile (Distillat) */
+function distillate(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="distillat en seringue">
+    <defs><linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/><stop offset="100%" stop-color="${color}"/>
+    </linearGradient></defs>
+    <ellipse cx="58" cy="103" rx="24" ry="5.5" fill="#000" opacity="0.10"/>
+    <g transform="rotate(34 60 60)">
+      <rect x="47" y="22" width="26" height="62" rx="6" fill="#fff" fill-opacity="0.12" stroke="${color}" stroke-opacity="0.5" stroke-width="2"/>
+      <rect x="49" y="46" width="22" height="36" rx="4" fill="url(#${g})"/>
+      <rect x="52" y="10" width="16" height="14" rx="3" fill="${color}" fill-opacity="0.7"/>
+      <rect x="52" y="84" width="16" height="7" rx="2" fill="${color}" fill-opacity="0.7"/>
+      <path d="M60 91 L60 106" stroke="${color}" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <circle cx="88" cy="94" r="4.5" fill="${color}"/>
+  </svg>`;
+}
+/* Bourgeon enrobé / givré (Moon Rock, Caviar ; version givrée pour Fresh Frozen / WPFF) */
+function frostyNug(color, frosty){
+  const g = uid();
+  const cr = [[52,52,1.8],[66,50,1.6],[60,62,2],[72,64,1.6],[48,66,1.6],[64,74,1.7],[56,70,1.4],[78,58,1.4],[42,56,1.3],[70,46,1.3]];
+  const crystals = cr.map(c=>`<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}" fill="#fff" opacity="${frosty?0.85:0.68}"/>`).join("");
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="bourgeon enrobé">
+    <defs><radialGradient id="${g}" cx="38%" cy="30%" r="78%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="${frosty?0.55:0.28}"/>
+      <stop offset="34%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.7"/>
+    </radialGradient></defs>
+    <ellipse cx="60" cy="99" rx="36" ry="8" fill="#000" opacity="0.12"/>
+    <g fill="url(#${g})">
+      <circle cx="60" cy="60" r="26"/><circle cx="43" cy="52" r="15"/>
+      <circle cx="77" cy="54" r="16"/><circle cx="50" cy="75" r="14"/><circle cx="73" cy="76" r="13"/>
+    </g>
+    ${crystals}
+  </svg>`;
+}
+
+/* Détermine l'allure du bud selon la variété */
+function budLook(item){
+  const n = item.name;
+  const purple = /Purple|Granddaddy|GDP|Grape|Zkittlez|Blackberry|Punch|Forbidden|Pink Kush/i.test(n);
+  const highPistil = item.types.includes("sativa") ||
+    /Amnesia|Haze|Diesel|Sour|Tangie|Lemon|Jack|Durban|Ghost|Green Crack|Trainwreck|Mimosa|Panama|Acapulco|Maui|Lamb|Cinderella|Candyland/i.test(n);
+  const highFrost = /Glue|GG4|White Widow|Wedding|MAC|Gelato|Runtz|Cake|Kush Mints|Do-Si|Oreoz|Biscotti|Bruce|Jealousy|Gary|Cookies|Cream/i.test(n);
+  return { purple, pistil: highPistil ? "high" : "med", frost: highFrost ? "high" : "med" };
+}
+/* Fleur de cannabis dessinée : calices, pistils orange, trichomes */
+function budSVG(look){
+  const g = uid(), c = g + "c";
+  const base  = look.purple ? "#8a63cf" : "#57a24e";
+  const dark  = look.purple ? "#583c92" : "#2f6d33";
+  const light = look.purple ? "#b79ce2" : "#8fca75";
+  const silhouette = "M60 22 C 39 38 33 70 44 91 C 50 101 70 101 76 91 C 87 70 81 38 60 22 Z";
+  const bumps = [[60,34,10],[48,44,12],[72,44,12],[42,58,13],[60,54,14],[78,58,13],
+                 [50,72,13],[70,72,13],[60,75,14],[45,85,10],[75,85,10],[60,90,11]];
+  const bumpEls = bumps.map((b,i)=>{
+    const f = i%3===0 ? light : (i%3===1 ? base : dark);
+    return `<circle cx="${b[0]}" cy="${b[1]}" r="${b[2]}" fill="${f}"/>`;
+  }).join("");
+  const leaves = `
+    <path d="M40 54 q-14 -3 -20 -14 q12 1 20 7 Z" fill="${dark}"/>
+    <path d="M80 54 q14 -3 20 -14 q-12 1 -20 7 Z" fill="${dark}"/>
+    <path d="M60 24 q-6 -13 0 -22 q6 9 0 22 Z" fill="${dark}"/>`;
+  const triPos=[[50,46],[64,44],[46,60],[70,58],[58,56],[52,70],[68,70],[60,64],
+                [44,78],[74,78],[56,80],[64,82],[50,54],[72,50],[60,38],[66,62]];
+  const nT = look.frost==="high" ? 16 : 9;
+  const trichomes = triPos.slice(0,nT).map(t=>`<circle cx="${t[0]}" cy="${t[1]}" r="1.7" fill="#eef3df" opacity="0.9"/>`).join("");
+  const pistilPos=[[52,40],[68,42],[44,54],[74,56],[58,50],[48,68],[72,68],
+                   [60,70],[54,82],[68,84],[60,86],[46,60],[76,60]];
+  const nP = look.pistil==="high" ? pistilPos.length : 7;
+  const pistils = pistilPos.slice(0,nP).map((p,i)=>{
+    const d = i%2 ? 1 : -1, x=p[0], y=p[1];
+    return `<path d="M${x} ${y} q ${d*4} -6 ${d*1.5} -12" stroke="#df7d16" stroke-width="2.2" fill="none" stroke-linecap="round"/>`
+         + `<path d="M${x} ${y} q ${d*-3} -5 ${d*2} -10" stroke="#f4a63c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.85"/>`;
+  }).join("");
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="fleur de cannabis">
+    <defs>
+      <radialGradient id="${g}" cx="42%" cy="28%" r="82%">
+        <stop offset="0%" stop-color="${light}"/><stop offset="58%" stop-color="${base}"/><stop offset="100%" stop-color="${dark}"/>
+      </radialGradient>
+      <clipPath id="${c}"><path d="${silhouette}"/></clipPath>
+    </defs>
+    <ellipse cx="60" cy="104" rx="29" ry="5.5" fill="#000" opacity="0.12"/>
+    ${leaves}
+    <path d="${silhouette}" fill="url(#${g})"/>
+    <g clip-path="url(#${c})">${bumpEls}${trichomes}</g>
+    ${pistils}
+  </svg>`;
+}
+
+/* Galette crémeuse aplatie et cold-cured (Piattella) */
+function piattellaSVG(color){
+  const g = uid();
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="piattella crémeuse">
+    <defs><radialGradient id="${g}" cx="40%" cy="32%" r="82%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.72"/>
+      <stop offset="46%" stop-color="${color}"/>
+      <stop offset="100%" stop-color="${color}" stop-opacity="0.85"/>
+    </radialGradient></defs>
+    <ellipse cx="60" cy="90" rx="43" ry="8" fill="#000" opacity="0.13"/>
+    <ellipse cx="60" cy="67" rx="43" ry="20" fill="${color}"/>
+    <ellipse cx="60" cy="67" rx="43" ry="20" fill="#000" opacity="0.22"/>
+    <ellipse cx="60" cy="58" rx="43" ry="20" fill="url(#${g})"/>
+    <ellipse cx="60" cy="58" rx="43" ry="20" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="1.2"/>
+    <path d="M32 56 Q54 47 76 54" stroke="#fff" stroke-opacity="0.32" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M38 64 Q60 58 84 62" stroke="#000" stroke-opacity="0.09" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="47" cy="50" rx="14" ry="6" fill="#fff" opacity="0.42"/>
+  </svg>`;
+}
+
+function specimenFor(item, color){
+  const t = item.types[0];
+  if (t === "indica" || t === "sativa" || t === "hybrid") return budSVG(budLook(item));
+  const n = item.name;
+  if (/Charas|Temple|Malana/i.test(n)) return hashBall(color);
+  if (/Shatter/i.test(n)) return shatterShard(color);
+  if (/Diamond/i.test(n)) return diamondsSauce(color);
+  if (/Distillat/i.test(n)) return distillate(color);
+  if (/Moon Rock|Caviar/i.test(n)) return frostyNug(color, false);
+  if (/Fresh Frozen|WPFF/i.test(n)) return frostyNug(color, true);
+  if (/Piattella|Piatella/i.test(n)) return piattellaSVG(color);
+  if (/Rosin|Cold Cure|Jar|Budder|Badder|Live Resin|Wax|Crumble/i.test(n)) return dabGlob(color);
+  if (/Bubble|Full Melt|Melt|µ/i.test(n)) return bubbleHash(color);
+  if (/Sift|Kief|Static|Blond|Jaune/i.test(n)) return siftPile(color);
+  if (/Marocain|Afghan|Liban|Pakistani|Squidgy|Pollen|Zero-Zero|00/i.test(n)) return hashBrick(color);
+  return (t === "concentrate") ? dabGlob(color) : hashBrick(color);
+}
+/* Couleur réaliste par type de hash / concentré */
+function hashColor(item){
+  const n = item.name;
+  if (/Liban/i.test(n)) return "#a2502f";                        // rouge-brun libanais
+  if (/Afghan|Pakistani|Squidgy/i.test(n)) return "#3c2d22";     // noir-brun
+  if (/Temple/i.test(n)) return "#4c3a25";                       // brun temple ball
+  if (/Charas|Malana/i.test(n)) return "#5e6438";                // olive foncé
+  if (/Marocain|Pollen/i.test(n)) return "#b58a49";              // kaki / tan
+  if (/Zero-Zero|00/i.test(n)) return "#c99a4e";                 // tan doré
+  if (/Blond|Jaune|Kief|Sift|Static/i.test(n)) return "#d8ab4e"; // blond doré
+  if (/Diamond/i.test(n)) return "#d7b877";                      // sauce dorée + cristaux
+  if (/Distillat/i.test(n)) return "#e6c877";                    // or pâle
+  if (/Shatter/i.test(n)) return "#c47f27";                      // ambre translucide
+  if (/Wax|Crumble/i.test(n)) return "#d6ab42";                  // jaune beurre
+  if (/Frozen Bananas/i.test(n)) return "#e0b83c";               // banane / ambre clair
+  if (/Piattella|Piatella/i.test(n)) return "#d3b579";          // crème cold-cured
+  if (/Rosin|Cold Cure|Jar|Budder|Badder|Live Resin/i.test(n)) return "#dd9f2c"; // ambre rosin
+  if (/Moon Rock|Caviar/i.test(n)) return "#5a8f46";             // vert (fleur enrobée)
+  if (/Fresh Frozen|WPFF/i.test(n)) return "#5aa04e";            // vert givré
+  if (/Bubble|Full Melt|Melt|µ/i.test(n)) return "#d0a24e";      // blond ambré
+  return "#a5703f";                                              // bronze par défaut
+}
+function primaryColor(item){
+  const t = item.types[0];
+  if (t === "hash" || t === "concentrate") return hashColor(item);
+  return TYPE_COLOR[t];
+}
+
+/* Insère la feuille dans le logo */
+document.querySelector(".brand-glyph svg").outerHTML =
+  leafSVG("#ffffff").replace('viewBox="-90 -96 180 116"','viewBox="-90 -96 180 116" style="width:26px;height:26px"');
+
+/* ---------------- Rendu grille ---------------- */
+const grid = document.getElementById("grid");
+const countEl = document.getElementById("count");
+let activeFilter = "all";
+let query = "";
+
+function matchFilter(item){
+  if (activeFilter === "all") return true;
+  if (activeFilter === "hash") return item.types.includes("hash") || item.types.includes("concentrate");
+  return item.types.includes(activeFilter);
+}
+function matchQuery(item){
+  if (!query) return true;
+  const hay = (item.name + " " + item.flavors.join(" ") + " " + item.terp + " " + item.origin + " " + item.types.map(t=>TYPE_LABEL[t]).join(" ")).toLowerCase();
+  return hay.includes(query);
+}
+
+function render(){
+  const list = DATA.filter(i => matchFilter(i) && matchQuery(i));
+  countEl.innerHTML = `<b>${String(list.length).padStart(3,"0")}</b> / ${String(DATA.length).padStart(3,"0")} spécimens`;
+  grid.innerHTML = "";
+  if (!list.length){
+    grid.innerHTML = `<p class="empty">Aucun spécimen ne correspond.<br>Essaie un autre terme ou filtre.</p>`;
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  list.forEach(item => {
+    const color = primaryColor(item);
+    const btn = document.createElement("button");
+    btn.className = "card";
+    btn.style.setProperty("--tint", color);
+    btn.setAttribute("aria-label", `${item.name}, ouvrir la fiche`);
+    btn.innerHTML = `
+      <span class="thc-tag">THC ${item.thc}</span>
+      <span class="card-no">Nº ${String(item.n).padStart(3,"0")}</span>
+      <div class="specimen">${specimenFor(item, color)}</div>
+      <h2 class="card-name">${item.name}</h2>
+      <div class="badges">${item.types.map(t=>`<span class="badge" style="background:${TYPE_COLOR[t]}">${TYPE_LABEL[t]}</span>`).join("")}</div>
+    `;
+    btn.addEventListener("click", () => openSheet(item));
+    frag.appendChild(btn);
+  });
+  grid.appendChild(frag);
+}
+
+/* ---------------- Fiche détail ---------------- */
+const overlay = document.getElementById("overlay");
+const sheet = document.getElementById("sheet");
+let lastFocus = null;
+
+function openSheet(item){
+  const color = primaryColor(item);
+  lastFocus = document.activeElement;
+  sheet.style.setProperty("--tint", color);
+  const statRows = Object.entries(item.stats).map(([k,v]) => `
+    <div class="stat-row">
+      <span class="name">${k}</span>
+      <span class="stat-track"><span class="stat-fill" style="width:${v}%"></span></span>
+      <span class="val">${v}</span>
+    </div>`).join("");
+
+  sheet.innerHTML = `
+    <div class="sheet-hero" style="--tint:${color}">
+      <div class="grabber"></div>
+      <button class="sheet-close" id="closeBtn" aria-label="Fermer">✕</button>
+      <div class="sheet-specimen">${specimenFor(item, color)}</div>
+      <p class="sheet-no">Nº ${String(item.n).padStart(3,"0")} · ${item.cls}</p>
+      <h2 class="sheet-name" id="sheetName">${item.name}</h2>
+      <div class="sheet-badges">${item.types.map(t=>`<span class="badge" style="background:${TYPE_COLOR[t]}">${TYPE_LABEL[t]}</span>`).join("")}</div>
+    </div>
+    <div class="sheet-body" style="--tint:${color}; --tint-solid:${color}">
+      <div class="potency">
+        <div class="pot-tile"><div class="k">THC</div><div class="v">${item.thc}</div></div>
+        <div class="pot-tile"><div class="k">CBD</div><div class="v">${item.cbd}</div></div>
+      </div>
+      <p class="desc">${item.desc}</p>
+      <div>
+        <div class="section-label">Profil d'effets</div>
+        <div class="stats">${statRows}</div>
+      </div>
+      <div>
+        <div class="section-label">Arômes &amp; saveurs</div>
+        <div class="taglist">
+          <span class="tag terp">🧬 ${item.terp}</span>
+          ${item.flavors.map(f=>`<span class="tag">${f}</span>`).join("")}
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Fiche technique</div>
+        <div class="meta-line"><span class="k">Nez</span><span class="v">${item.aroma}</span></div>
+        <div class="meta-line"><span class="k">Origine</span><span class="v">${item.origin}</span></div>
+        <div class="meta-line"><span class="k">Classe</span><span class="v">${item.cls}</span></div>
+      </div>
+    </div>`;
+
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  document.getElementById("closeBtn").addEventListener("click", closeSheet);
+  sheet.scrollTop = 0;
+  document.getElementById("closeBtn").focus();
+}
+function closeSheet(){
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+overlay.addEventListener("click", e => { if (e.target === overlay) closeSheet(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && overlay.classList.contains("open")) closeSheet(); });
+
+/* ---------------- Contrôles ---------------- */
+document.getElementById("chips").addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
+  activeFilter = chip.dataset.f;
+  render();
+});
+document.getElementById("search").addEventListener("input", e => {
+  query = e.target.value.trim().toLowerCase();
+  render();
+});
+
+/* ---------------- Easter egg 7373 ---------------- */
+const egg = document.getElementById("egg");
+document.getElementById("eggEmblem").innerHTML = leafSVG("#7ed36f");
+function buildEggLeaves(){
+  const layer = document.getElementById("eggLeaves");
+  layer.innerHTML = "";
+  const greens = ["#5fbf52","#7ed36f","#3f9a4a","#a7e08f","#4fae55"];
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  for (let i = 0; i < 16; i++){
+    const d = document.createElement("div");
+    d.className = "egg-leaf";
+    const size = 26 + Math.random() * 46;
+    d.style.left = (Math.random() * 100) + "%";
+    d.style.width = size + "px";
+    d.style.height = size + "px";
+    d.style.opacity = (0.55 + Math.random() * 0.4).toFixed(2);
+    if (reduce){
+      d.style.top = (Math.random() * 100) + "%";
+      d.style.transform = "rotate(" + (Math.random()*360) + "deg)";
+    } else {
+      d.style.animationDuration = (6 + Math.random() * 7).toFixed(1) + "s";
+      d.style.animationDelay = (-Math.random() * 9).toFixed(1) + "s";
+    }
+    d.innerHTML = leafSVG(greens[i % greens.length]);
+    layer.appendChild(d);
+  }
+}
+function openEgg(){
+  buildEggLeaves();
+  egg.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeEgg(){
+  egg.classList.remove("open");
+  document.body.style.overflow = "";
+  document.getElementById("eggLeaves").innerHTML = "";
+}
+egg.addEventListener("click", e => { if (e.target !== document.getElementById("eggClose")) closeEgg(); });
+document.getElementById("eggClose").addEventListener("click", closeEgg);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && egg.classList.contains("open")) closeEgg(); });
+document.getElementById("search").addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.value.replace(/\s/g,"") === "7373"){
+    e.preventDefault();
+    e.target.value = "";
+    query = "";
+    render();
+    e.target.blur();
+    openEgg();
+  }
+});
+
+/* ---------------- Thème ---------------- */
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("click", () => {
+  const root = document.documentElement;
+  const current = root.getAttribute("data-theme");
+  let next;
+  if (current === "dark") next = "light";
+  else if (current === "light") next = "dark";
+  else {
+    const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    next = sysDark ? "light" : "dark";
+  }
+  root.setAttribute("data-theme", next);
+  try { localStorage.setItem("cannapedex-theme", next); } catch(e){}
+});
+try {
+  const saved = localStorage.getItem("cannapedex-theme");
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+} catch(e){}
+
+(function(){
+  const weed = DATA.filter(i => ["indica","sativa","hybrid"].includes(i.types[0])).length;
+  const hash = DATA.length - weed;
+  document.getElementById("hero").innerHTML =
+    '<div class="hero-tile t-all"><div class="n">' + DATA.length + '</div><div class="l">Spécimens</div></div>' +
+    '<div class="hero-tile t-weed"><div class="n">' + weed + '</div><div class="l">Variétés</div></div>' +
+    '<div class="hero-tile t-hash"><div class="n">' + hash + '</div><div class="l">Hash &amp; conc.</div></div>';
+})();
+
+render();
+</script>
+</body>
+</html>
