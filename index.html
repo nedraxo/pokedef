@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Pokédef">
 <meta name="description" content="Pokédef — herbier de référence des variétés de cannabis et types de hash : fiches, effets, arômes et origines.">
 <title>Pokédef</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1685,5 +1688,6 @@ render();
 </script>
 <!-- Statistiques GoatCounter (visiteurs uniques, sans cookie) -->
 <script data-goatcounter="https://nedraxo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
 </body>
 </html>
