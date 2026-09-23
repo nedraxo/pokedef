@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="Pokédef">
@@ -598,8 +599,36 @@
     .egg, .egg-leaf { animation: none; }
   }
 </style>
+<style>
+  .agegate{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;
+    padding:26px;background:radial-gradient(130% 120% at 50% -10%,#1c3a1e,#0a130a 70%);}
+  .agegate-box{max-width:440px;width:100%;text-align:center;background:#141b10;border:1px solid rgba(234,240,226,0.14);
+    border-radius:22px;padding:26px 22px 24px;box-shadow:0 26px 60px -20px rgba(0,0,0,0.85);}
+  .agegate-leaf{font-size:38px;line-height:1;margin-bottom:8px}
+  .agegate-box h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.7rem;margin:0 0 12px;color:#eaf0e2;letter-spacing:-0.02em}
+  .agegate-box p{font-size:0.92rem;line-height:1.5;color:#c3cbb8;margin:0 0 12px}
+  .agegate-warn{font-size:0.82rem;color:#9aa88c}
+  .agegate-warn strong,.agegate-box p strong{color:#eaf0e2}
+  .agegate-btns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .agegate-yes{padding:13px 16px;border-radius:13px;border:none;font-weight:700;font-size:0.95rem;color:#0e130c;
+    background:linear-gradient(135deg,#5cbd6f,#a9761f);cursor:pointer}
+  .agegate-no{padding:11px 16px;border-radius:13px;border:1px solid rgba(234,240,226,0.2);background:transparent;color:#c3cbb8;font-size:0.88rem;cursor:pointer}
+  .agegate-yes:active,.agegate-no:active{transform:scale(0.97)}
+</style>
 </head>
 <body>
+<div id="ageGate" class="agegate" role="dialog" aria-modal="true" aria-label="Vérification d'âge">
+  <div class="agegate-box">
+    <div class="agegate-leaf" aria-hidden="true">🌿</div>
+    <h1>Pokédef</h1>
+    <p>Répertoire <strong>strictement informatif et culturel</strong> sur les variétés de cannabis et les types de hash. <strong>Aucune vente</strong>, aucune mise en relation, aucune incitation à consommer.</p>
+    <p class="agegate-warn">Réservé aux adultes. En entrant, tu confirmes avoir <strong>18&nbsp;ans ou plus</strong> et consulter ce site uniquement là où la loi l'autorise. L'usage de stupéfiants est interdit par la loi dans de nombreux pays, dont la France.</p>
+    <div class="agegate-btns">
+      <button id="ageYes" class="agegate-yes" type="button">J'ai 18 ans ou plus — Entrer</button>
+      <button id="ageNo" class="agegate-no" type="button">J'ai moins de 18 ans — Quitter</button>
+    </div>
+  </div>
+</div>
 <header>
   <div class="header-inner">
     <div class="brand">
@@ -631,7 +660,8 @@
   <p class="count" id="count"></p>
   <div class="grid" id="grid"></div>
   <p class="disclaimer">
-    Pokédef — herbier de référence à visée culturelle et informative. Les taux (THC/CBD) sont des ordres de grandeur variables selon la culture, la récolte et la génétique. Ce répertoire n'encourage aucun usage : renseigne-toi sur la législation en vigueur là où tu te trouves.
+    <strong>Pokédef — contenu strictement informatif et culturel, réservé aux adultes (18+).</strong>
+    Ce répertoire ne vend rien, ne met personne en relation et <strong>n'encourage ni ne fait la promotion d'aucun usage</strong>. L'usage, la détention et la vente de stupéfiants sont interdits par la loi dans de nombreux pays, dont la France. Les taux (THC/CBD) sont des ordres de grandeur indicatifs. Consulte et respecte la législation en vigueur là où tu te trouves.
   </p>
 </main>
 
@@ -644,7 +674,7 @@
   <button class="egg-close" id="eggClose" aria-label="Fermer">✕</button>
   <div class="egg-content">
     <span class="egg-emblem" id="eggEmblem" aria-hidden="true"></span>
-    <h2 class="egg-title">Aller mamène,<br>on vas se gazer 🌬️</h2>
+    <h2 class="egg-title">Tu as trouvé<br>le code secret 🌿</h2>
     <div class="egg-sign">
       <span class="egg-pseudo">tim.mrtb</span>
       <span class="egg-signature">tim.mrtb</span>
@@ -719,7 +749,7 @@ const DATA = [
     flavors:["Agrumes","Terre","Citron"], aroma:"Citronnée et terreuse.",
     origin:"Landraces × Haze", cls:"Sativa dominante",
     stats:{Détente:35,Énergie:86,Euphorie:82,Créativité:80,Sommeil:14},
-    desc:"Haze planante et euphorisante, montée cérébrale intense. Un incontournable des cups." },
+    desc:"Haze planante et euphorisante, montée cérébrale intense. Connue dans les concours (cups)." },
   { n:11, name:"Purple Haze", types:["sativa"], thc:"16–20%", cbd:"< 1%", terp:"Terpinolène",
     flavors:["Baies","Terre","Sucré"], aroma:"Baies sucrées et notes terreuses.",
     origin:"Purple Thaï × Haze", cls:"Sativa dominante",
@@ -739,7 +769,7 @@ const DATA = [
     flavors:["Bonbon","Fruité","Sucré"], aroma:"Bonbons fruités acidulés.",
     origin:"Zkittlez × Gelato", cls:"Hybride équilibré",
     stats:{Détente:68,Énergie:58,Euphorie:88,Créativité:60,Sommeil:42},
-    desc:"Star moderne au goût de bonbons. Euphorie durable et détente équilibrée." },
+    desc:"Variété moderne au goût de bonbons. Euphorie durable et détente équilibrée." },
   { n:15, name:"Gelato", types:["hybrid"], thc:"20–25%", cbd:"< 1%", terp:"Caryophyllène",
     flavors:["Sucré","Baies","Agrumes"], aroma:"Dessert crémeux, baies et agrumes.",
     origin:"Sunset Sherbet × Thin Mint GSC", cls:"Hybride équilibré",
@@ -836,7 +866,7 @@ const DATA = [
     flavors:["Terpènes intenses","Riche","Vivant"], aroma:"Spectre complet, saveur explosive de la plante fraîche.",
     origin:"Bubble hash WPFF pressé à chaud (sans solvant)", cls:"Extrait solventless haut de gamme",
     stats:{Détente:85,Énergie:50,Euphorie:94,Créativité:60,Sommeil:62},
-    desc:"Le graal du solventless : on lave de la matière fresh frozen en bubble hash, qu'on presse ensuite à chaud. Aucun solvant, pureté et arôme maximaux. À distinguer du simple rosin (fleur séchée)." },
+    desc:"Le sommet technique du solventless : on lave de la matière fresh frozen en bubble hash, qu'on presse ensuite à chaud. Aucun solvant, pureté et arôme maximaux. À distinguer du simple rosin (fleur séchée)." },
   { n:34, name:"Hash Rosin", types:["concentrate"], thc:"60–80%", cbd:"< 3%", terp:"Full-spectrum",
     flavors:["Résine","Riche","Terpènes"], aroma:"Riche et complet, moins volatil que le live rosin.",
     origin:"Bubble hash / dry sift de fleur séchée pressé à chaud", cls:"Extrait solventless",
@@ -989,7 +1019,7 @@ const DATA = [
     flavors:["Diesel","Herbacé","Épicé"], aroma:"Diesel herbacé et épicé.",
     origin:"The Y × Snowman", cls:"Hybride équilibré",
     stats:{Détente:68,Énergie:60,Euphorie:84,Créativité:60,Sommeil:42},
-    desc:"Effet puissant et bien équilibré, phare de la « Cookies fam »." },
+    desc:"Effet puissant et bien équilibré, issue de la lignée « Cookies »." },
   { n:64, name:"Lemon Cherry Gelato", types:["hybrid","indica"], thc:"19–28%", cbd:"< 1%", terp:"Limonène",
     flavors:["Cerise","Citron","Sucré"], aroma:"Cerise et citron sucrés.",
     origin:"Sunset Sherbet × Girl Scout Cookies", cls:"Hybride à dominante indica",
@@ -1170,7 +1200,7 @@ const DATA = [
     flavors:["Puissant","Résineux","Riche"], aroma:"Très résineuse et dense.",
     origin:"Fleur trempée dans l'huile de hash puis roulée dans le kief", cls:"Fleur + concentré + kief",
     stats:{Détente:84,Énergie:40,Euphorie:88,Créativité:48,Sommeil:64},
-    desc:"Bourgeon enrobé d'huile puis roulé dans le kief : véritable bombe de puissance, à fumer avec parcimonie." },
+    desc:"Bourgeon enrobé d'huile puis roulé dans le kief : concentré très puissant, à utiliser avec modération." },
   { n:100, name:"Caviar", types:["concentrate"], thc:"40–65%", cbd:"< 2%", terp:"Fleur + sauce",
     flavors:["Riche","Résineux","Intense"], aroma:"Riche, collant et très aromatique.",
     origin:"Fleur premium enrobée de concentré (sauce / rosin) — cousin du Moon Rock", cls:"Fleur haut de gamme enrobée",
@@ -1689,5 +1719,14 @@ render();
 <!-- Statistiques GoatCounter (visiteurs uniques, sans cookie) -->
 <script data-goatcounter="https://nedraxo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("./sw.js").catch(function(){});});}</script>
+<script>
+(function(){
+  var g=document.getElementById('ageGate');
+  try{ if(localStorage.getItem('pokedef_age_ok')==='1'){ g.style.display='none'; } }catch(e){}
+  var y=document.getElementById('ageYes'), n=document.getElementById('ageNo');
+  if(y) y.addEventListener('click',function(){ try{localStorage.setItem('pokedef_age_ok','1');}catch(e){} g.style.display='none'; });
+  if(n) n.addEventListener('click',function(){ location.href='https://www.google.com/'; });
+})();
+</script>
 </body>
 </html>
